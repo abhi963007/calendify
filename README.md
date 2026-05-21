@@ -43,8 +43,23 @@ calendify/
 
 ---
 
+## 🖥️ Local Browsing & Verification Server
+
+To browse the pages locally with **all CSS animations, JS interactions, web fonts, and images fully loading and functional**, do not open the HTML files directly via `file:///` protocols (as modern browsers block crucial Webflow scripts due to local CORS restrictions). 
+
+Instead, launch our built-in local development server:
+1.  Double-click **[serve.bat](file:///c:/Users/Abhi/Desktop/calendify/serve.bat)** in the root folder (on Windows).
+2.  Or run in your terminal:
+    ```bash
+    python serve.py
+    ```
+3.  This automatically spins up a local server at `http://localhost:8000` and opens **[home.html](http://localhost:8000/project/home/home.html)** in your default browser. All cross-page links, fonts, and assets will load perfectly!
+
+---
+
 ## 🛠️ Next Steps & Handoff
 
 1.  **Client Presentation:** Use the generic proposal and PDF quote under `/docs` to get customer sign-off on the ₹20,000 scope.
 2.  **Name Determination:** Once the name is finalized, replace occurrences in `docs/project_prd.md` and `docs/project_quotation.md`.
 3.  **Active Development:** The extracted code files inside `/project` will be referenced and initialized inside the Next.js root layout once the project environment is provisioned.
+
