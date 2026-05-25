@@ -23,13 +23,13 @@ Calendify is a premium automated scheduling platform designed specifically for i
 
 ```mermaid
 graph TD
-    Client[👤 Booker / Client] -->|Selects Slot & Fills Details| WebUI[💻 Next.js Frontend (Vercel)]
-    WebUI -->|Initiates Booking Request| Supabase[⚡ Supabase Edge Functions]
-    WebUI -->|Opens Checkout Popup| Razorpay[💳 Razorpay Gateway]
+    Client["👤 Booker / Client"] -->|Selects Slot & Fills Details| WebUI["💻 Next.js Frontend (Vercel)"]
+    WebUI -->|Initiates Booking Request| Supabase["⚡ Supabase Edge Functions"]
+    WebUI -->|Opens Checkout Popup| Razorpay["💳 Razorpay Gateway"]
     Razorpay -->|Webhook: Payment Confirmed| Supabase
-    Supabase -->|Creates Invite Event| GCal[📅 Google Calendar API]
-    Supabase -->|Sends Sleek Booking Details| Resend[✉️ Resend API]
-    Supabase -->|Persists Appointment & Logs| DB[(🗄️ PostgreSQL Database)]
+    Supabase -->|Creates Invite Event| GCal["📅 Google Calendar API"]
+    Supabase -->|Sends Sleek Booking Details| Resend["✉️ Resend API"]
+    Supabase -->|Persists Appointment & Logs| DB[("🗄️ PostgreSQL Database")]
 ```
 
 ### Key Pillars of the Platform:
