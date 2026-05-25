@@ -9517,3 +9517,9 @@ strong {
     grid-column: span 2 / span 2;
   }
 }
+
+.w-webflow-badge {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
