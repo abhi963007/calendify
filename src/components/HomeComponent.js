@@ -1041,6 +1041,29 @@ export default function HomeComponent() {
 
 </div>
 </section>
+
+      {/* Hidden dummy elements to satisfy Webflow's interaction timeline bindings for deleted sections */}
+      <div style={{ display: 'none' }} aria-hidden="true">
+        <div data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a293b"></div>
+        <div data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a293e"></div>
+        <div data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2950"></div>
+        <div data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2953"></div>
+        <div data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2965"></div>
+        <div data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2968"></div>
+        <div data-w-id="5f318317-6352-cd2c-fa80-9d73f7657681"></div>
+        <div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e29049"></div>
+        <div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e2905d"></div>
+        <div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e29073"></div>
+        <div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e290ce"></div>
+        <div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e290e5"></div>
+        <div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e290fc"></div>
+        <div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e29113"></div>
+        <div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e2912a"></div>
+        <div data-w-id="bae4ff8e-1620-2073-5de0-191ac0a51f48"></div>
+        <div data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0"></div>
+        <div data-w-id="cf0040d8-047a-0dcb-a6c9-47f0210576c0"></div>
+        <div data-w-id="f0ba1002-ceaa-b094-e370-721c07210235"></div>
+      </div>
 </div>
     </>
   );
