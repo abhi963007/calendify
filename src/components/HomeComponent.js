@@ -1,90 +1,179 @@
-<!DOCTYPE html>
-<!-- This site was created in Webflow. https://webflow.com -->
-<!-- Last Published: Mon May 04 2026 06:53:52 GMT+0000 (Coordinated Universal Time) -->
-<html data-wf-domain="soulspace-tnc.webflow.io" data-wf-page="69e5d1dcd77e4d3b24627a1c" data-wf-site="69dcd4a89df987972bf2caaa" lang="en" class=" w-mod-js">
-<head>
-<meta charset="utf-8">
-<link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous">
-<title>Calendify - Premium Automated Scheduling & Payments</title>
-<meta content="Calendify is a premium automated scheduling and payment platform designed for independent consultants and counselors in the Indian market, featuring direct Google Calendar sync and Razorpay UPI payments." name="description">
-<meta content="Calendify - Premium Automated Scheduling & Payments" property="og:title">
-<meta content="Calendify is a premium automated scheduling and payment platform designed for independent consultants and counselors in the Indian market, featuring direct Google Calendar sync and Razorpay UPI payments." property="og:description">
-<meta content="images/69e89b542c061b097e3b60c4_Thumbnail.jpg" property="og:image">
-<meta content="Calendify - Premium Automated Scheduling & Payments" name="twitter:title">
-<meta content="Calendify is a premium automated scheduling and payment platform designed for independent consultants and counselors in the Indian market, featuring direct Google Calendar sync and Razorpay UPI payments." name="twitter:description">
-<meta property="og:type" content="website">
-<meta content="summary_large_image" name="twitter:card">
-<meta content="width=device-width, initial-scale=1" name="viewport">
-<meta content="Webflow" name="generator">
-<link href="css/soulspace-tnc.webflow.shared.58288691d.css" rel="stylesheet" type="text/css" crossorigin="anonymous">
-<style>html.w-mod-js:not(.w-mod-ix3) :is([hero-animation], [text-animation], [card-animation], [animated-step], [animated-over], [scale-animation]) {visibility: hidden !important;}</style>
-<link href="https://fonts.googleapis.com" rel="preconnect">
-<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
-<script src="js/webfont.js" type="text/javascript">
-</script>
-<script type="text/javascript">WebFont.load({  google: {    families: ["Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic"]  }});</script>
-<script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
-<link href="images/69e89cb1c2a8ce6933951ed3_Light%20Favicon.jpg" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: light)">
-<link href="images/69e89cad42cc03d4cd14e337_Dark%20Favicon.jpg" rel="icon" type="image/png" sizes="32x32" media="(prefers-color-scheme: dark)">
-<link href="images/69e89ca75781e9ddcebd7be5_Webclip.jpg" rel="apple-touch-icon">
-</head>
-<body>
-<div class="page-wrapper">
-<div data-animation="default" class="header-section w-nav" data-easing2="ease" data-easing="ease" data-wf--header-section--variant="home" data-collapse="medium" data-w-id="033b4653-fb4d-df51-5ba4-b2c4d7a16526" role="banner" data-duration="400">
-<div class="header-wrapper">
-<div class="header-spacer">
+'use client';
+
+import React, { useEffect } from 'react';
+
+export default function HomeComponent() {
+  useEffect(() => {
+    // Explicitly bind Webflow required attributes to both html and body tags on client mount
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-wf-page', '69e5d1dcd77e4d3b24627a1c');
+      document.documentElement.setAttribute('data-wf-site', '69dcd4a89df987972bf2caaa');
+      document.documentElement.setAttribute('data-wf-domain', 'soulspace-tnc.webflow.io');
+      
+      if (document.body) {
+        document.body.setAttribute('data-wf-page', '69e5d1dcd77e4d3b24627a1c');
+        document.body.setAttribute('data-wf-site', '69dcd4a89df987972bf2caaa');
+        document.body.setAttribute('data-wf-domain', 'soulspace-tnc.webflow.io');
+      }
+    }
+
+    const loadScript = (src, forceReload = false) => {
+      return new Promise((resolve, reject) => {
+        // If not forceReload and already exists, resolve immediately
+        if (!forceReload) {
+          const existingScript = document.querySelector(`script[src^="${src}"]`);
+          if (existingScript) {
+            resolve();
+            return;
+          }
+        } else {
+          // Remove any existing script tag to prevent duplicate executions
+          const existingScripts = document.querySelectorAll(`script[src^="${src}"]`);
+          existingScripts.forEach(el => el.remove());
+        }
+
+        const script = document.createElement('script');
+        // Force fresh load using cache-busting timestamp
+        script.src = forceReload ? `${src}?t=${Date.now()}` : src;
+        script.async = false;
+        script.onload = () => resolve();
+        script.onerror = () => reject();
+        document.body.appendChild(script);
+      });
+    };
+
+    const loadAllScripts = async () => {
+      try {
+        // Load jQuery once
+        await loadScript('/js/jquery-3.5.1.min.dc5e7f18c8.js', false);
+        
+        // Load Webflow chunk files and core in order without cache-busting to prevent registry conflicts
+        await loadScript('/js/webflow.schunk.36b8fb49256177c8.js', false);
+        await loadScript('/js/webflow.schunk.9bf5c47fc595a77b.js', false);
+        await loadScript('/js/webflow.7e81f4df.2b34c97f0f395373.js', false);
+        
+        // Load GSAP libraries sequentially
+        await loadScript('/js/gsap.min.js', false);
+        await loadScript('/js/ScrollTrigger.min.js', false);
+        await loadScript('/js/Draggable.min.js', false);
+        
+        // Register all plugins on the single global window.gsap instance
+        if (window.gsap && window.ScrollTrigger && window.Draggable) {
+          window.gsap.registerPlugin(window.ScrollTrigger, window.Draggable);
+          
+          document.querySelectorAll('[data-carousel="wrapper"]').forEach(wrapper => {
+            const inner = wrapper.querySelector('[data-carousel="inner"]');
+            if (!inner) return;
+            
+            function getBounds() {
+              const maxScroll = inner.scrollWidth - wrapper.offsetWidth;
+              return {
+                minX: -maxScroll,
+                maxX: 0
+              };
+            }
+
+            const drag = window.Draggable.create(inner, {
+              type: "x",
+              bounds: getBounds(),
+              inertia: true,
+              edgeResistance: 1.36,
+
+              onPress() {
+                this.update();
+              },
+
+              onDrag() {
+                window.gsap.set(inner, { x: this.x });
+              },
+
+              onThrowUpdate() {
+                window.gsap.set(inner, { x: this.x });
+              }
+            })[0];
+
+            window.addEventListener("resize", () => {
+              drag.applyBounds(getBounds());
+            });
+          });
+        }
+
+        // Re-initialize Webflow animations on the newly mounted React DOM
+        if (window.Webflow) {
+          if (window.Webflow.destroy) window.Webflow.destroy();
+          if (window.Webflow.ready) window.Webflow.ready();
+          
+          const ix2 = window.Webflow.require('ix2');
+          if (ix2 && ix2.init) {
+            ix2.init();
+          }
+        }
+      } catch (err) {
+        console.error("Error loading animation scripts:", err);
+      }
+    };
+
+    loadAllScripts();
+  }, []);
+
+  return (
+    <>
+      <div className="page-wrapper">
+<div data-animation="default" className="header-section w-nav" data-easing2="ease" data-easing="ease" data-wf--header-section--variant="home" data-collapse="medium" data-w-id="033b4653-fb4d-df51-5ba4-b2c4d7a16526" role="banner" data-duration="400">
+<div className="header-wrapper">
+<div className="header-spacer">
 </div>
-<div class="header-wrapp">
-<div class="main-container w-container">
-<div class="header-block">
-<div class="header-brand-block">
-<a aria-label="Brand" href="/" aria-current="page" class="header-brand w-nav-brand w--current">
-<img loading="eager" src="images/69df17a3b36ee4d40f5cddc9_Light%20Logo.svg" alt="Calendify" class="header-logo light-logo w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
-<img loading="eager" src="images/69df17a810ffffec324e035a_Dark%20Logo.svg" alt="Calendify" class="header-logo dark-logo w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
+<div className="header-wrapp">
+<div className="main-container w-container">
+<div className="header-block">
+<div className="header-brand-block">
+<a aria-label="Brand" href="/" aria-current="page" className="header-brand w-nav-brand w--current">
+<img loading="eager" src="/images/69df17a3b36ee4d40f5cddc9_Light%20Logo.svg" alt="Calendify" className="header-logo light-logo w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d" />
+<img loading="eager" src="/images/69df17a810ffffec324e035a_Dark%20Logo.svg" alt="Calendify" className="header-logo dark-logo w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d" />
 </a>
 </div>
-<nav role="navigation" class="header-menu-block w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-menu">
-<div class="header-menu w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
-<a aria-label="Nav Link" href="#" aria-current="page" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-link w--current">Home</a>
-<a aria-label="Nav Link" href="#about" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-link">Why Us</a>
-<a aria-label="Nav Link" href="#services" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-link">Modules</a>
-<a aria-label="Nav Link" href="#blog" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-link">Insights</a>
-<div data-delay="400" data-hover="true" data-w-id="033b4653-fb4d-df51-5ba4-b2c4d7a1653b" class="header-dropdown w-dropdown">
-<div class="header-drop w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-dropdown-toggle">
-<div class="header-dropdown-text">Pages</div>
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 14 8" fill="none" class="header-dropdown-icon">
+<nav role="navigation" className="header-menu-block w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-menu">
+<div className="header-menu w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
+<a aria-label="Nav Link" href="#" aria-current="page" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-link w--current">Home</a>
+<a aria-label="Nav Link" href="#about" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-link">Why Us</a>
+<a aria-label="Nav Link" href="#services" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-link">Modules</a>
+<a aria-label="Nav Link" href="#blog" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-nav-link">Insights</a>
+<div data-delay="400" data-hover="true" data-w-id="033b4653-fb4d-df51-5ba4-b2c4d7a1653b" className="header-dropdown w-dropdown">
+<div className="header-drop w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d w-dropdown-toggle">
+<div className="header-dropdown-text">Pages</div>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 14 8" fill="none" className="header-dropdown-icon">
 <path d="M0.534261 0.454916C0.77776 0.206533 1.1588 0.183953 1.4273 0.387175L1.50423 0.454916L7.00004 6.06118L12.4959 0.454916C12.7394 0.206533 13.1204 0.183953 13.3889 0.387175L13.4658 0.454916C13.7093 0.703299 13.7315 1.09198 13.5322 1.36587L13.4658 1.44434L7.48502 7.54508C7.24153 7.79347 6.86049 7.81605 6.59198 7.61282L6.51506 7.54508L0.534261 1.44434C0.266412 1.17112 0.266412 0.728137 0.534261 0.454916Z" fill="currentColor">
 </path>
 </svg>
 </div>
-<nav class="header-wrap w-dropdown-list">
-<div class="w-layout-grid header-megamenu w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
-<a href="#about" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Why Us</a>
-<a href="#faq" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">FAQ</a>
-<a href="#services" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Modules</a>
-<a href="#pricing" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Pricing</a>
-<a href="#blog" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Insights</a>
-<a href="/privacy-policy" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Privacy Policy</a>
-<a href="#features" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Features</a>
-<a href="/terms-conditions" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Terms & Conditions</a>
-<a href="#contact" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Contact</a>
-<a href="/404" aria-label="Nav Link" class="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">404</a>
+<nav className="header-wrap w-dropdown-list">
+<div className="w-layout-grid header-megamenu w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
+<a href="#about" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Why Us</a>
+<a href="#faq" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">FAQ</a>
+<a href="#services" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Modules</a>
+<a href="#pricing" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Pricing</a>
+<a href="#blog" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Insights</a>
+<a href="/privacy-policy" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Privacy Policy</a>
+<a href="#features" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Features</a>
+<a href="/terms-conditions" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Terms & Conditions</a>
+<a href="#contact" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">Contact</a>
+<a href="/404" aria-label="Nav Link" className="header-menu-link w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">404</a>
 </div>
 </nav>
 </div>
-<div class="header-button-block display-show-for-mobile">
-<div class="header-button display-show-for-home w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
-<a aria-label="Link Block" data-wf--button--variant="home-header" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" class="button w-inline-block">
-<div class="button-block">
-<div class="button-text-block w-variant-599a9d30-71a8-4f9c-af41-2722bfbbc67e">
-<div class="button-wrap">
-<div class="button-text">Get Started</div>
-<div class="button-text">Get Started</div>
+<div className="header-button-block display-show-for-mobile">
+<div className="header-button display-show-for-home w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
+<a aria-label="Link Block" data-wf--button--variant="home-header" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" className="button w-inline-block">
+<div className="button-block">
+<div className="button-text-block w-variant-599a9d30-71a8-4f9c-af41-2722bfbbc67e">
+<div className="button-wrap">
+<div className="button-text">Get Started</div>
+<div className="button-text">Get Started</div>
 </div>
 </div>
-<div class="button-icon-block">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="button-icon">
-<g clip-path="url(#clip0_118_93)">
+<div className="button-icon-block">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="button-icon">
+<g clipPath="url(#clip0_118_93)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -99,18 +188,18 @@
 </div>
 </a>
 </div>
-<div class="header-button display-show-for-global w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
-<a aria-label="Link Block" data-wf--button--variant="global-header" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" class="button w-inline-block">
-<div class="button-block">
-<div class="button-text-block w-variant-716501fb-0778-f0b1-77b9-8e4d075a407e">
-<div class="button-wrap">
-<div class="button-text">Get Started</div>
-<div class="button-text">Get Started</div>
+<div className="header-button display-show-for-global w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
+<a aria-label="Link Block" data-wf--button--variant="global-header" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" className="button w-inline-block">
+<div className="button-block">
+<div className="button-text-block w-variant-716501fb-0778-f0b1-77b9-8e4d075a407e">
+<div className="button-wrap">
+<div className="button-text">Get Started</div>
+<div className="button-text">Get Started</div>
 </div>
 </div>
-<div class="button-icon-block w-variant-716501fb-0778-f0b1-77b9-8e4d075a407e">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="button-icon">
-<g clip-path="url(#clip0_118_93)">
+<div className="button-icon-block w-variant-716501fb-0778-f0b1-77b9-8e4d075a407e">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="button-icon">
+<g clipPath="url(#clip0_118_93)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -128,19 +217,19 @@
 </div>
 </div>
 </nav>
-<div class="header-button-block display-show-for-desktop">
-<div class="header-button display-show-for-home w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
-<a aria-label="Link Block" data-wf--button--variant="home-header" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" class="button w-inline-block">
-<div class="button-block">
-<div class="button-text-block w-variant-599a9d30-71a8-4f9c-af41-2722bfbbc67e">
-<div class="button-wrap">
-<div class="button-text">Get Started</div>
-<div class="button-text">Get Started</div>
+<div className="header-button-block display-show-for-desktop">
+<div className="header-button display-show-for-home w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
+<a aria-label="Link Block" data-wf--button--variant="home-header" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" className="button w-inline-block">
+<div className="button-block">
+<div className="button-text-block w-variant-599a9d30-71a8-4f9c-af41-2722bfbbc67e">
+<div className="button-wrap">
+<div className="button-text">Get Started</div>
+<div className="button-text">Get Started</div>
 </div>
 </div>
-<div class="button-icon-block">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="button-icon">
-<g clip-path="url(#clip0_118_93)">
+<div className="button-icon-block">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="button-icon">
+<g clipPath="url(#clip0_118_93)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -155,18 +244,18 @@
 </div>
 </a>
 </div>
-<div class="header-button display-show-for-global w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
-<a aria-label="Link Block" data-wf--button--variant="global-header" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" class="button w-inline-block">
-<div class="button-block">
-<div class="button-text-block w-variant-716501fb-0778-f0b1-77b9-8e4d075a407e">
-<div class="button-wrap">
-<div class="button-text">Get Started</div>
-<div class="button-text">Get Started</div>
+<div className="header-button display-show-for-global w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
+<a aria-label="Link Block" data-wf--button--variant="global-header" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" className="button w-inline-block">
+<div className="button-block">
+<div className="button-text-block w-variant-716501fb-0778-f0b1-77b9-8e4d075a407e">
+<div className="button-wrap">
+<div className="button-text">Get Started</div>
+<div className="button-text">Get Started</div>
 </div>
 </div>
-<div class="button-icon-block w-variant-716501fb-0778-f0b1-77b9-8e4d075a407e">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="button-icon">
-<g clip-path="url(#clip0_118_93)">
+<div className="button-icon-block w-variant-716501fb-0778-f0b1-77b9-8e4d075a407e">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="button-icon">
+<g clipPath="url(#clip0_118_93)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -182,47 +271,47 @@
 </a>
 </div>
 </div>
-<div class="header-menu-button w-nav-button">
-<div class="header-menu-line">
-<div class="top">
+<div className="header-menu-button w-nav-button">
+<div className="header-menu-line">
+<div className="top">
 </div>
-<div class="middle">
+<div className="middle">
 </div>
-<div class="bottom">
-</div>
-</div>
-</div>
-</div>
-<div class="header-backg display-show-for-home w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
-</div>
-<div class="header-backg display-show-for-global w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
+<div className="bottom">
 </div>
 </div>
 </div>
 </div>
+<div className="header-backg display-show-for-home w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
 </div>
-<div class="main-wrapper">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5d2492c2742e7f3a2d02f_SoulSpace_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5d2492c2742e7f3a2d02f_SoulSpace_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5d2492c2742e7f3a2d02f_SoulSpace_webm.webm" data-autoplay="true" data-loop="true" data-wf-ignore="true" class="home-section w-background-video w-background-video-atom">
-<video id="231c47d5-94bb-2a10-ba24-a0735963c81f-video" autoplay="" loop="" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e5d2492c2742e7f3a2d02f_soulspace_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5d2492c2742e7f3a2d02f_SoulSpace_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5d2492c2742e7f3a2d02f_SoulSpace_webm.webm" data-wf-ignore="true">
+<div className="header-backg display-show-for-global w-variant-8bb9a9cc-3fcd-e834-d7ef-bfe187dcea8d">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div className="main-wrapper">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5d2492c2742e7f3a2d02f_SoulSpace_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5d2492c2742e7f3a2d02f_SoulSpace_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5d2492c2742e7f3a2d02f_SoulSpace_webm.webm" data-autoplay data-loop="true" data-wf-ignore="true" className="home-section w-background-video w-background-video-atom">
+<video id="231c47d5-94bb-2a10-ba24-a0735963c81f-video" autoPlay loop  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5d2492c2742e7f3a2d02f_SoulSpace_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5d2492c2742e7f3a2d02f_SoulSpace_webm.webm" data-wf-ignore="true" />
 </video>
-<div class="w-layout-blockcontainer main-container w-container">
-<div class="home-block">
-<div hero-animation="" class="home-wrapp">
-<div class="home-title">PREMIUM AUTOMATED SCHEDULING & PAYMENTS FOR CONSULTANTS</div>
-<div class="home-button">
-<a aria-label="Link Block" data-wf--button--variant="home-hero" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#services" class="button w-inline-block">
-<div class="button-block">
-<div class="button-text-block w-variant-5cd14cb0-8578-65ee-8f92-79fd0d0ffde7">
-<div class="button-wrap">
-<div class="button-text">Get Started For Free</div>
-<div class="button-text">Get Started For Free</div>
+<div className="w-layout-blockcontainer main-container w-container">
+<div className="home-block">
+<div hero-animation="true" className="home-wrapp">
+<div className="home-title">PREMIUM AUTOMATED SCHEDULING & PAYMENTS FOR CONSULTANTS</div>
+<div className="home-button">
+<a aria-label="Link Block" data-wf--button--variant="home-hero" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#services" className="button w-inline-block">
+<div className="button-block">
+<div className="button-text-block w-variant-5cd14cb0-8578-65ee-8f92-79fd0d0ffde7">
+<div className="button-wrap">
+<div className="button-text">Get Started For Free</div>
+<div className="button-text">Get Started For Free</div>
 </div>
 </div>
-<div class="button-icon-block">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="button-icon">
-<g clip-path="url(#clip0_118_93)">
+<div className="button-icon-block">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="button-icon">
+<g clipPath="url(#clip0_118_93)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -238,11 +327,11 @@
 </a>
 </div>
 </div>
-<img src="images/69e5e09164cd0a53349811ab_e37dc4f7e56989adc4d2d88a3d712e8c_SoulSpace%20Header.svg" loading="lazy" hero-animation="" alt="Calendify" class="home-name">
+<img src="/images/69e5e09164cd0a53349811ab_e37dc4f7e56989adc4d2d88a3d712e8c_SoulSpace%20Header.svg" loading="lazy" hero-animation="" alt="Calendify" className="home-name" />
 </div>
 </div>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -255,21 +344,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5d2492c2742e7f3a2d02f_SoulSpace_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="231c47d5-94bb-2a10-ba24-a0735963c81f-video" class="w-backgroundvideo-backgroundvideoplaypausebutton home-state w-background-video--control">
-<span class="play-state">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon home">
+<button type="button" data-w-bg-video-control="true" aria-controls="231c47d5-94bb-2a10-ba24-a0735963c81f-video" className="w-backgroundvideo-backgroundvideoplaypausebutton home-state w-background-video--control">
+<span className="play-state">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon home">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon home">
+<span hidden className="pause-state">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon home">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -277,94 +366,94 @@
 </button>
 </div>
 </div>
-<section class="trusted-section">
-<div class="w-layout-blockcontainer main-container w-container">
-<div text-animation="" class="trusted-block">
-<div class="trusted-text-block">
-<div class="trusted-text">Trusted by more than <strong>500+ Consultants in India</strong>
+<section className="trusted-section">
+<div className="w-layout-blockcontainer main-container w-container">
+<div text-animation="true" className="trusted-block">
+<div className="trusted-text-block">
+<div className="trusted-text">Trusted by more than <strong>500+ Consultants in India</strong>
 </div>
 </div>
-<div data-w-id="a94275d3-60a1-91f3-9a1d-ab8c557dc68d" class="trusted-logo-block">
-<div class="trusted-over trusted-left">
+<div data-w-id="a94275d3-60a1-91f3-9a1d-ab8c557dc68d" className="trusted-logo-block">
+<div className="trusted-over trusted-left">
 </div>
-<div class="trusted-wrap">
-<img src="images/69e5e3dadc3b2964f7dcc472_320ac808e8fd18f72717903544666085_Trusted%20Logo%2001.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3dd43aa2e5b11d1fa2d_1e10160d58bce8e1545ac495c0be9a27_Trusted%20Logo%2002.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3e29a5913e746bfce01_99e82f27fb96c20a4fa4901ce4616faa_Trusted%20Logo%2003.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3e61298adff7e40d763_913590ee66c83383b0efb31aedae16b5_Trusted%20Logo%2004.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3dadc3b2964f7dcc472_320ac808e8fd18f72717903544666085_Trusted%20Logo%2001.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3dd43aa2e5b11d1fa2d_1e10160d58bce8e1545ac495c0be9a27_Trusted%20Logo%2002.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3e29a5913e746bfce01_99e82f27fb96c20a4fa4901ce4616faa_Trusted%20Logo%2003.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3e61298adff7e40d763_913590ee66c83383b0efb31aedae16b5_Trusted%20Logo%2004.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
+<div className="trusted-wrap">
+<img src="/images/69e5e3dadc3b2964f7dcc472_320ac808e8fd18f72717903544666085_Trusted%20Logo%2001.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3dd43aa2e5b11d1fa2d_1e10160d58bce8e1545ac495c0be9a27_Trusted%20Logo%2002.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3e29a5913e746bfce01_99e82f27fb96c20a4fa4901ce4616faa_Trusted%20Logo%2003.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3e61298adff7e40d763_913590ee66c83383b0efb31aedae16b5_Trusted%20Logo%2004.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3dadc3b2964f7dcc472_320ac808e8fd18f72717903544666085_Trusted%20Logo%2001.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3dd43aa2e5b11d1fa2d_1e10160d58bce8e1545ac495c0be9a27_Trusted%20Logo%2002.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3e29a5913e746bfce01_99e82f27fb96c20a4fa4901ce4616faa_Trusted%20Logo%2003.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3e61298adff7e40d763_913590ee66c83383b0efb31aedae16b5_Trusted%20Logo%2004.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
 </div>
-<div class="trusted-wrap">
-<img src="images/69e5e3dadc3b2964f7dcc472_320ac808e8fd18f72717903544666085_Trusted%20Logo%2001.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3dd43aa2e5b11d1fa2d_1e10160d58bce8e1545ac495c0be9a27_Trusted%20Logo%2002.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3e29a5913e746bfce01_99e82f27fb96c20a4fa4901ce4616faa_Trusted%20Logo%2003.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3e61298adff7e40d763_913590ee66c83383b0efb31aedae16b5_Trusted%20Logo%2004.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3dadc3b2964f7dcc472_320ac808e8fd18f72717903544666085_Trusted%20Logo%2001.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3dd43aa2e5b11d1fa2d_1e10160d58bce8e1545ac495c0be9a27_Trusted%20Logo%2002.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3e29a5913e746bfce01_99e82f27fb96c20a4fa4901ce4616faa_Trusted%20Logo%2003.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
-<img src="images/69e5e3e61298adff7e40d763_913590ee66c83383b0efb31aedae16b5_Trusted%20Logo%2004.svg" loading="lazy" alt="Trusted by more than 500+ Company" class="trusted-logo">
+<div className="trusted-wrap">
+<img src="/images/69e5e3dadc3b2964f7dcc472_320ac808e8fd18f72717903544666085_Trusted%20Logo%2001.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3dd43aa2e5b11d1fa2d_1e10160d58bce8e1545ac495c0be9a27_Trusted%20Logo%2002.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3e29a5913e746bfce01_99e82f27fb96c20a4fa4901ce4616faa_Trusted%20Logo%2003.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3e61298adff7e40d763_913590ee66c83383b0efb31aedae16b5_Trusted%20Logo%2004.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3dadc3b2964f7dcc472_320ac808e8fd18f72717903544666085_Trusted%20Logo%2001.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3dd43aa2e5b11d1fa2d_1e10160d58bce8e1545ac495c0be9a27_Trusted%20Logo%2002.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3e29a5913e746bfce01_99e82f27fb96c20a4fa4901ce4616faa_Trusted%20Logo%2003.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
+<img src="/images/69e5e3e61298adff7e40d763_913590ee66c83383b0efb31aedae16b5_Trusted%20Logo%2004.svg" loading="lazy" alt="Trusted by more than 500+ Company" className="trusted-logo" />
 </div>
-<div class="trusted-over trusted-right">
+<div className="trusted-over trusted-right">
 </div>
-</div>
-</div>
-</div>
-</section>
-<section class="divider-section">
-<div class="w-layout-blockcontainer main-container w-container">
-<div class="divider-block">
-<div class="divider">
 </div>
 </div>
 </div>
 </section>
-<section class="about-section">
-<div class="section-space">
-<div class="w-layout-blockcontainer main-container w-container">
-<div class="about-block">
-<div class="about-details-block">
-<div class="about-info-block">
-<div text-animation="" class="about-info">
-<div data-wf--section-info--variant="dark" class="section-info">{ Why Calendify? }</div>
+<section className="divider-section">
+<div className="w-layout-blockcontainer main-container w-container">
+<div className="divider-block">
+<div className="divider">
 </div>
 </div>
-<div class="about-text-block">
-<div text-animation="" class="about-name-block">
-<div data-w-id="6abd3e2b-6eef-fbfa-5312-f6ec544a3ac4" class="about-title">
-<span class="heading-01">Scheduling</span>
-<span class="heading-02">should</span>
-<span class="heading-03">be</span>
-<span class="heading-04">effortless.</span>
-<span class="heading-05">We</span>
-<span class="heading-06">integrate</span>
-<span class="heading-07">calendar</span>
-<span class="heading-08">sync</span>
-<span class="heading-09">with</span>
-<span class="heading-10">instant</span>
-<span class="heading-11">UPI</span>
-<span class="heading-12">payments</span>
-<span class="heading-13">for</span>
-<span class="heading-14">complete</span>
-<span class="heading-15">business</span>
-<span class="heading-16">growth.</span>
+</div>
+</section>
+<section className="about-section">
+<div className="section-space">
+<div className="w-layout-blockcontainer main-container w-container">
+<div className="about-block">
+<div className="about-details-block">
+<div className="about-info-block">
+<div text-animation="true" className="about-info">
+<div data-wf--section-info--variant="dark" className="section-info">Why Calendify?</div>
 </div>
 </div>
-<div text-animation="" class="about-button-block">
-<div class="about-button">
-<a aria-label="Link Block" data-wf--button--variant="primary" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#about" class="button w-inline-block">
-<div class="button-block">
-<div class="button-text-block">
-<div class="button-wrap">
-<div class="button-text">Explore Our Core Features</div>
-<div class="button-text">Explore Our Core Features</div>
+<div className="about-text-block">
+<div text-animation="true" className="about-name-block">
+<div data-w-id="6abd3e2b-6eef-fbfa-5312-f6ec544a3ac4" className="about-title">
+<span className="heading-01">Scheduling</span>
+<span className="heading-02">should</span>
+<span className="heading-03">be</span>
+<span className="heading-04">effortless.</span>
+<span className="heading-05">We</span>
+<span className="heading-06">integrate</span>
+<span className="heading-07">calendar</span>
+<span className="heading-08">sync</span>
+<span className="heading-09">with</span>
+<span className="heading-10">instant</span>
+<span className="heading-11">UPI</span>
+<span className="heading-12">payments</span>
+<span className="heading-13">for</span>
+<span className="heading-14">complete</span>
+<span className="heading-15">business</span>
+<span className="heading-16">growth.</span>
 </div>
 </div>
-<div class="button-icon-block">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="button-icon">
-<g clip-path="url(#clip0_118_93)">
+<div text-animation="true" className="about-button-block">
+<div className="about-button">
+<a aria-label="Link Block" data-wf--button--variant="primary" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#about" className="button w-inline-block">
+<div className="button-block">
+<div className="button-text-block">
+<div className="button-wrap">
+<div className="button-text">Explore Our Core Features</div>
+<div className="button-text">Explore Our Core Features</div>
+</div>
+</div>
+<div className="button-icon-block">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="button-icon">
+<g clipPath="url(#clip0_118_93)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -382,88 +471,88 @@
 </div>
 </div>
 </div>
-<div class="about-content-block">
-<div class="about-img-block">
-<img src="images/69e5edd365aac5e5a3108666_5e4c4910e883a0eed8d919819ec802e6_About%20Us.webp" loading="lazy" alt="Calendify Dashboard" class="about-img">
-<div image-overlay="" data-wf--image-overlay--variant="dark" class="image-over">
-<div animated-over="" class="overlay-column">
+<div className="about-content-block">
+<div className="about-img-block">
+<img src="/images/69e5edd365aac5e5a3108666_5e4c4910e883a0eed8d919819ec802e6_About%20Us.webp" loading="lazy" alt="Calendify Dashboard" className="about-img" />
+<div image-overlay="" data-wf--image-overlay--variant="dark" className="image-over">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
+<div animated-over="true" className="overlay-column">
 </div>
-<div animated-over="" class="overlay-column">
-</div>
-</div>
-</div>
-<div class="about-card-block">
-<div class="about-line-wrap">
-<div class="about-line">
+<div animated-over="true" className="overlay-column">
 </div>
 </div>
-<div step-animation="" class="about-card-wrap">
-<div animated-step="" class="about-card">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 34 34" fill="none" class="about-icon">
+</div>
+<div className="about-card-block">
+<div className="about-line-wrap">
+<div className="about-line">
+</div>
+</div>
+<div step-animation="true" className="about-card-wrap">
+<div animated-step="true" className="about-card">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 34 34" fill="none" className="about-icon">
 <path d="M33.0039 16.0039H31.664C32.2797 14.78 32.6055 13.4201 32.6055 12.0101C32.6055 9.63301 31.6798 7.39817 29.999 5.7173C28.3181 4.03642 26.0832 3.11072 23.7062 3.11072C21.3291 3.11072 19.0943 4.03642 17.4134 5.7173L17 6.13067L16.5866 5.71736C14.9057 4.03649 12.671 3.11078 10.2938 3.11078C7.91669 3.11078 5.68192 4.03649 4.00104 5.7173C2.32023 7.39817 1.39453 9.63301 1.39453 12.0101C1.39453 13.42 1.72025 14.78 2.33604 16.0039H0.996094C0.445984 16.0039 0 16.4499 0 17C0 17.5501 0.445984 17.9961 0.996094 17.9961H3.70852C3.80342 18.1002 3.90084 18.2026 4.00111 18.3029L16.2957 30.5975C16.4902 30.792 16.7451 30.8892 17 30.8892C17.2549 30.8892 17.5099 30.792 17.7043 30.5975L29.9989 18.3029C30.0992 18.2026 30.1966 18.1002 30.2915 17.9961H33.0039C33.554 17.9961 34 17.5501 34 17C34 16.4499 33.554 16.0039 33.0039 16.0039ZM3.38672 12.0101C3.38672 10.1651 4.10517 8.43059 5.40978 7.12597C6.71434 5.82135 8.44887 5.10291 10.2938 5.10291C12.1388 5.10291 13.8733 5.82135 15.1779 7.12597L16.2956 8.24366C16.6846 8.63266 17.3153 8.63266 17.7043 8.24366L18.822 7.12597C20.1266 5.82135 21.8611 5.10291 23.7061 5.10291C25.5511 5.10291 27.2856 5.82135 28.5902 7.12597C29.8948 8.43059 30.6133 10.1651 30.6133 12.0101C30.6133 13.4616 30.1683 14.8446 29.3433 16.0039H24.1224L21.8923 12.4826C21.7054 12.1876 21.378 12.0124 21.0286 12.0198C20.6795 12.0275 20.36 12.2175 20.1864 12.5206L16.9208 18.2223L12.7088 9.90919C12.5334 9.56288 12.1713 9.34952 11.7848 9.36393C11.3968 9.37774 11.0523 9.61574 10.9019 9.97367L8.36925 16.0039H4.65667C3.83171 14.8446 3.38672 13.4617 3.38672 12.0101ZM17 28.4844L6.51166 17.9961H9.03125C9.43234 17.9961 9.79432 17.7555 9.94965 17.3857L11.9049 12.7303L15.9787 20.7705C16.1442 21.0972 16.4756 21.3068 16.8418 21.3161C16.8503 21.3163 16.8588 21.3165 16.8673 21.3165C17.2237 21.3165 17.5538 21.1257 17.7316 20.8154L21.0937 14.9451L22.7327 17.5331C22.9153 17.8213 23.2329 17.9961 23.5742 17.9961H27.4883L17 28.4844Z" fill="currentColor">
 </path>
 </svg>
-<div class="about-name">Direct Calendar Sync</div>
-<div class="about-except">Direct integration with Google Calendar reads your availability and writes new bookings instantly, eliminating any administrative back-and-forth.</div>
+<div className="about-name">Direct Calendar Sync</div>
+<div className="about-except">Direct integration with Google Calendar reads your availability and writes new bookings instantly, eliminating any administrative back-and-forth.</div>
 </div>
-<div animated-step="" class="about-card">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 34 34" fill="none" class="about-icon">
+<div animated-step="true" className="about-card">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 34 34" fill="none" className="about-icon">
 <path d="M17 32.0272C16.5784 32.0269 16.1638 31.9188 15.7957 31.7132L11.0207 29.0604C8.64719 27.7408 6.66949 25.8108 5.29229 23.4703C3.91509 21.1297 3.18842 18.4636 3.1875 15.748V8.38731C3.18722 7.77452 3.41426 7.18341 3.8247 6.72838C4.23513 6.27335 4.79977 5.98675 5.40934 5.92405C7.30886 5.72269 9.17836 5.30019 10.9799 4.66514C12.6311 4.08171 14.215 3.32292 15.7044 2.40179C16.0944 2.16362 16.5431 2.0376 17.0001 2.0376C17.457 2.0376 17.905 2.16362 18.295 2.40179C19.7847 3.32279 21.3688 4.08156 23.0201 4.66514C24.8216 5.30021 26.6911 5.72272 28.5907 5.92409C29.2002 5.98679 29.7649 6.27338 30.1753 6.72841C30.5857 7.18343 30.8128 7.77453 30.8125 8.38731V15.748C30.8116 18.4637 30.0849 21.1298 28.7077 23.4703C27.3305 25.8109 25.3528 27.7408 22.9793 29.0604L18.2043 31.7132C17.8362 31.9188 17.4216 32.0269 17 32.0272ZM16.8222 4.20994C15.203 5.21016 13.4814 6.0343 11.6868 6.66831C9.72937 7.35925 7.69771 7.81847 5.63339 8.03655C5.54564 8.04406 5.46392 8.08431 5.40447 8.14929C5.34503 8.21427 5.31219 8.29923 5.3125 8.38731V15.748C5.31334 18.0847 5.93864 20.3787 7.12369 22.3926C8.30873 24.4064 10.0105 26.067 12.0527 27.2024L16.8278 29.8552C16.8802 29.8851 16.9396 29.9009 17 29.9009C17.0604 29.9009 17.1198 29.8851 17.1722 29.8552L21.9473 27.2024C23.9895 26.067 25.6913 24.4064 26.8763 22.3926C28.0614 20.3787 28.6867 18.0847 28.6875 15.748V8.38731C28.6878 8.29923 28.6549 8.21427 28.5955 8.14929C28.536 8.08432 28.4543 8.04409 28.3665 8.0366C26.3022 7.81851 24.2706 7.3593 22.3131 6.66835C20.5186 6.03433 18.797 5.21017 17.1777 4.20994C17.1241 4.17735 17.0626 4.16012 16.9999 4.16012C16.9372 4.16012 16.8758 4.17735 16.8222 4.20994Z" fill="currentColor">
 </path>
 <path d="M20.5417 24.4375H13.4584C12.6133 24.4366 11.8031 24.1005 11.2055 23.5029C10.6079 22.9053 10.2718 22.0951 10.2709 21.25V17C10.2718 16.1549 10.6079 15.3447 11.2055 14.7471C11.8031 14.1495 12.6133 13.8134 13.4584 13.8125H20.5417C21.3868 13.8134 22.197 14.1495 22.7946 14.7471C23.3922 15.3447 23.7283 16.1549 23.7292 17V21.25C23.7283 22.0951 23.3922 22.9053 22.7946 23.5029C22.197 24.1005 21.3868 24.4366 20.5417 24.4375ZM13.4584 15.9375C13.1767 15.9378 12.9066 16.0499 12.7074 16.249C12.5082 16.4482 12.3962 16.7183 12.3959 17V21.25C12.3962 21.5317 12.5082 21.8018 12.7074 22.001C12.9066 22.2001 13.1767 22.3122 13.4584 22.3125H20.5417C20.8234 22.3122 21.0935 22.2001 21.2927 22.001C21.4919 21.8018 21.6039 21.5317 21.6042 21.25V17C21.6039 16.7183 21.4919 16.4482 21.2927 16.249C21.0935 16.0499 20.8234 15.9378 20.5417 15.9375H13.4584Z" fill="currentColor">
@@ -471,8 +560,8 @@
 <path d="M19.8333 15.9375H14.1666C13.8849 15.9375 13.6146 15.8255 13.4154 15.6263C13.2162 15.427 13.1042 15.1568 13.1041 14.875V12.0417C13.1041 11.0085 13.5146 10.0175 14.2452 9.28694C14.9758 8.55633 15.9667 8.14587 17 8.14587C18.0332 8.14587 19.0241 8.55633 19.7547 9.28694C20.4853 10.0175 20.8958 11.0085 20.8958 12.0417V14.875C20.8957 15.1568 20.7838 15.427 20.5845 15.6263C20.3853 15.8255 20.1151 15.9375 19.8333 15.9375ZM15.2291 13.8125H18.7708V12.0417C18.7708 11.5721 18.5842 11.1216 18.2521 10.7895C17.92 10.4574 17.4696 10.2709 17 10.2709C16.5303 10.2709 16.0799 10.4574 15.7478 10.7895C15.4157 11.1216 15.2291 11.5721 15.2291 12.0417V13.8125Z" fill="currentColor">
 </path>
 </svg>
-<div class="about-name">Secure Upfront Payments</div>
-<div class="about-except">Razorpay integration processes UPI, cards, and wallets. Bookings are only confirmed after successful payments to eliminate no-shows completely.</div>
+<div className="about-name">Secure Upfront Payments</div>
+<div className="about-except">Razorpay integration processes UPI, cards, and wallets. Bookings are only confirmed after successful payments to eliminate no-shows completely.</div>
 </div>
 </div>
 </div>
@@ -481,31 +570,31 @@
 </div>
 </div>
 </section>
-<section class="offer-section">
-<div class="section-space">
-<div class="w-layout-blockcontainer main-container w-container">
-<div class="offer-block">
-<div class="offer-text-block">
-<div class="offer-info-block">
-<div text-animation="" class="offer-info">
-<div data-wf--section-info--variant="dark" class="section-info">{ Modules & Features }</div>
+<section className="offer-section">
+<div className="section-space">
+<div className="w-layout-blockcontainer main-container w-container">
+<div className="offer-block">
+<div className="offer-text-block">
+<div className="offer-info-block">
+<div text-animation="true" className="offer-info">
+<div data-wf--section-info--variant="dark" className="section-info">Modules & Features</div>
 </div>
 </div>
-<div class="offer-title-block">
-<h3 text-animation="" class="offer-title">Tailored Scheduling Packages</h3>
+<div className="offer-title-block">
+<h3 text-animation="true" className="offer-title">Tailored Scheduling Packages</h3>
 </div>
-<div class="offer-except-block">
-<div text-animation="" class="offer-except">Configure customized session links tailored exactly to your client booking flows, complete with UPI payments and automated calendar sync.</div>
+<div className="offer-except-block">
+<div text-animation="true" className="offer-except">Configure customized session links tailored exactly to your client booking flows, complete with UPI payments and automated calendar sync.</div>
 </div>
 </div>
-<div class="offer-card-block">
-<div text-animation="" class="offer-card w-dyn-list">
-<div role="list" class="offer-list w-dyn-items">
-<div role="listitem" class="offer-item w-dyn-item">
-<a aria-label="Link Block" data-w-id="82b85acb-148d-0dc0-15b7-4ce8f4c3465c" href="#services" class="offer-wrap w-inline-block">
-<div style="color:rgb(40,40,40)" class="offer-wrapp">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 52 52" fill="none" class="offer-icon">
-<g clip-path="url(#clip0_25_1232)">
+<div className="offer-card-block">
+<div text-animation="true" className="offer-card w-dyn-list">
+<div role="list" className="offer-list w-dyn-items">
+<div role="listitem" className="offer-item w-dyn-item">
+<a aria-label="Link Block" data-w-id="82b85acb-148d-0dc0-15b7-4ce8f4c3465c" href="#services" className="offer-wrap w-inline-block">
+<div style={{ color: "rgb(40,40,40)" }} className="offer-wrapp">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 52 52" fill="none" className="offer-icon">
+<g clipPath="url(#clip0_25_1232)">
 <path d="M23.1304 5.71589C23.1557 5.77794 23.1873 5.83695 23.224 5.89189C23.2607 5.94786 23.3034 5.99975 23.3502 6.04657C23.3971 6.09339 23.4499 6.13615 23.5049 6.17373C23.5599 6.21039 23.6199 6.24086 23.681 6.26636C23.7421 6.29175 23.8061 6.31216 23.8714 6.32536C23.9375 6.33867 24.0036 6.34466 24.0698 6.34466C24.1368 6.34466 24.2031 6.33857 24.2693 6.32536C24.3344 6.31216 24.3974 6.29185 24.4595 6.26636C24.5206 6.24096 24.5796 6.21039 24.6346 6.17373C24.6906 6.13605 24.7425 6.09329 24.7902 6.04657C24.837 5.99975 24.8788 5.94786 24.9164 5.89189C24.9531 5.83695 24.9846 5.77794 25.0101 5.71589C25.0355 5.65485 25.0549 5.59076 25.0681 5.52556C25.0813 5.46036 25.0875 5.39332 25.0875 5.32711C25.0875 5.26099 25.0813 5.19386 25.0681 5.12865C25.0549 5.06355 25.0355 4.99936 25.0101 4.93832C24.9847 4.87627 24.9531 4.81726 24.9164 4.76232C24.8788 4.70636 24.837 4.65446 24.7902 4.60764C24.7424 4.56082 24.6906 4.51806 24.6346 4.4815C24.5796 4.44483 24.5206 4.41325 24.4595 4.38786C24.3974 4.36246 24.3344 4.34307 24.2693 4.32986C24.138 4.30346 24.0027 4.30346 23.8714 4.32986C23.8061 4.34307 23.7421 4.36236 23.681 4.38786C23.6199 4.41325 23.5599 4.44483 23.5049 4.4815C23.45 4.51816 23.3971 4.56082 23.3502 4.60764C23.3034 4.65446 23.2607 4.70636 23.224 4.76232C23.1873 4.81726 23.1558 4.87627 23.1304 4.93832C23.105 4.99936 23.0856 5.06345 23.0724 5.12865C23.0592 5.19375 23.052 5.26089 23.052 5.32711C23.052 5.39332 23.0591 5.46046 23.0724 5.52556C23.0857 5.59066 23.1049 5.65485 23.1304 5.71589Z" fill="currentColor">
 </path>
 <path d="M26.9912 5.71705C27.0165 5.77808 27.0481 5.83709 27.0848 5.89214C27.1214 5.9481 27.1641 6 27.2109 6.04682C27.2578 6.09364 27.3098 6.1364 27.3656 6.17397C27.4206 6.21064 27.4806 6.24111 27.5416 6.2666C27.6028 6.29199 27.6668 6.3124 27.732 6.32459C27.7972 6.3378 27.8642 6.3449 27.9304 6.3449C27.9966 6.3449 28.0638 6.3378 28.1299 6.32459C28.194 6.3124 28.258 6.29209 28.3202 6.2666C28.3812 6.24121 28.4402 6.21064 28.4952 6.17397C28.5512 6.1363 28.6032 6.09354 28.6499 6.04682C28.6977 6 28.7394 5.9481 28.777 5.89214C28.8136 5.83719 28.8452 5.77819 28.8707 5.71705C28.8961 5.65499 28.9154 5.5909 28.9287 5.52682C28.9419 5.4606 28.948 5.39347 28.948 5.32735C28.948 5.26123 28.9419 5.1941 28.9287 5.1289C28.9154 5.0638 28.8961 4.99961 28.8707 4.93857C28.8453 4.87651 28.8136 4.81751 28.777 4.76256C28.7393 4.7066 28.6976 4.6547 28.6499 4.60788C28.6031 4.56106 28.5511 4.5183 28.4952 4.48174C28.4402 4.44508 28.3812 4.41349 28.3202 4.3881C28.258 4.36271 28.194 4.34331 28.1299 4.33011C27.9986 4.3037 27.8633 4.3037 27.732 4.33011C27.6668 4.34331 27.6028 4.36261 27.5416 4.3881C27.4806 4.41349 27.4216 4.44508 27.3656 4.48174C27.3097 4.5184 27.2577 4.56106 27.2109 4.60788C27.0217 4.79719 26.9128 5.05973 26.9128 5.32735C26.9128 5.39357 26.92 5.4607 26.9333 5.52682C26.9464 5.5908 26.9658 5.65499 26.9912 5.71705Z" fill="currentColor">
@@ -530,10 +619,10 @@
 </clipPath>
 </defs>
 </svg>
-<div class="offer-name">1-on-1 Consulting</div>
+<div className="offer-name">1-on-1 Consulting</div>
 </div>
-<svg style="background-color:rgba(0,0,0,0);-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="offer-arrow">
-<g clip-path="url(#clip0_178_1594)">
+<svg style={{ backgroundColor: "rgba(0,0,0,0)", WebkitTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", MozTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", msTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", transform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" }} xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="offer-arrow">
+<g clipPath="url(#clip0_178_1594)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -548,15 +637,15 @@
 </div>
 </div>
 </div>
-<div text-animation="" class="offer-line">
+<div text-animation="true" className="offer-line">
 </div>
-<div text-animation="" class="offer-card w-dyn-list">
-<div role="list" class="offer-list w-dyn-items">
-<div role="listitem" class="offer-item w-dyn-item">
-<a aria-label="Link Block" data-w-id="67688644-c722-a9d2-89cd-8f00893f8c24" href="#services" class="offer-wrap w-inline-block">
-<div style="color:rgb(40,40,40)" class="offer-wrapp">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 52 52" fill="none" class="offer-icon">
-<g clip-path="url(#clip0_25_1244)">
+<div text-animation="true" className="offer-card w-dyn-list">
+<div role="list" className="offer-list w-dyn-items">
+<div role="listitem" className="offer-item w-dyn-item">
+<a aria-label="Link Block" data-w-id="67688644-c722-a9d2-89cd-8f00893f8c24" href="#services" className="offer-wrap w-inline-block">
+<div style={{ color: "rgb(40,40,40)" }} className="offer-wrapp">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 52 52" fill="none" className="offer-icon">
+<g clipPath="url(#clip0_25_1244)">
 <path d="M0 35.241C0 44.4812 7.56316 51.9988 16.8594 51.9988C20.2263 51.9988 23.3639 50.9998 25.9931 49.2839C28.7133 51.0632 31.8533 51.9988 35.1406 51.9988C44.4368 51.9988 52 44.4812 52 35.241C52 26.0007 44.4368 18.4832 35.1406 18.4832C31.7737 18.4832 28.6361 19.4821 26.0069 21.198C23.2865 19.4187 20.1466 18.4832 16.8594 18.4832C7.56316 18.4832 0 26.0006 0 35.241ZM48.9531 35.241C48.9531 42.8012 42.7568 48.9519 35.1406 48.9519C32.7952 48.9519 30.5431 48.368 28.5296 47.2547C29.2785 46.527 29.96 45.7305 30.5633 44.8749C31.9853 45.5518 33.5425 45.905 35.1406 45.905C41.0768 45.905 45.9062 41.1211 45.9062 35.241C45.9062 29.3608 41.0768 24.5769 35.1406 24.5769C29.2605 24.5769 24.4766 29.3608 24.4766 35.241C24.4766 37.2377 23.7033 39.0564 22.4418 40.4162C21.7768 38.7821 21.4297 37.0227 21.4297 35.241C21.4297 27.6808 27.5804 21.53 35.1406 21.53C42.7568 21.53 48.9531 27.6807 48.9531 35.241ZM32.0962 28.2606C33.0292 27.852 34.0586 27.6238 35.1406 27.6238C39.3967 27.6238 42.8594 31.0408 42.8594 35.241C42.8594 39.4411 39.3967 42.8582 35.1406 42.8582C34.0806 42.8582 33.0464 42.6404 32.0916 42.2229C33.0703 40.0962 33.6172 37.7314 33.6172 35.241C33.6172 32.8242 33.0939 30.4398 32.0962 28.2606ZM19.9038 42.2213C18.9708 42.6298 17.9414 42.8581 16.8594 42.8581C12.6033 42.8581 9.14062 39.441 9.14062 35.2409C9.14062 31.0407 12.6033 27.6237 16.8594 27.6237C17.9194 27.6237 18.9535 27.8414 19.9084 28.259C18.9297 30.3857 18.3828 32.7506 18.3828 35.241C18.3828 37.6576 18.9061 40.042 19.9038 42.2213ZM16.8594 21.53C19.2047 21.53 21.4569 22.1139 23.4704 23.2273C22.7215 23.955 22.04 24.7515 21.4367 25.6072C20.0147 24.9302 18.4575 24.577 16.8594 24.577C10.9233 24.577 6.09375 29.3609 6.09375 35.2411C6.09375 41.1212 10.9233 45.9051 16.8594 45.9051C22.7395 45.9051 27.5234 41.1212 27.5234 35.2411C27.5234 33.2444 28.2967 31.4257 29.5582 30.0659C30.2232 31.6999 30.5703 33.4594 30.5703 35.2411C30.5703 42.8013 24.4196 48.952 16.8594 48.952C9.2432 48.952 3.04688 42.8013 3.04688 35.2411C3.04688 27.6809 9.2432 21.53 16.8594 21.53Z" fill="currentColor">
 </path>
 <path d="M26 18.0833L34.0507 9.79795C36.2825 7.55728 36.2798 3.9187 34.0425 1.68148C31.8299 -0.531364 28.2463 -0.558176 26 1.60084C23.7539 -0.558176 20.1703 -0.531364 17.9575 1.68148C15.7203 3.9187 15.7175 7.55728 17.9493 9.79795L26 18.0833ZM20.1119 3.83593C21.164 2.78394 22.8756 2.78394 23.9277 3.83593L26 5.90821L28.0722 3.83593C29.1242 2.78394 30.836 2.78384 31.888 3.83593C32.9399 4.88791 32.9399 6.59964 31.888 7.65173L26 13.7112L20.1119 7.65163C19.06 6.59964 19.06 4.88791 20.1119 3.83593Z" fill="currentColor">
@@ -569,10 +658,10 @@
 </clipPath>
 </defs>
 </svg>
-<div class="offer-name">Counseling & Coaching</div>
+<div className="offer-name">Counseling & Coaching</div>
 </div>
-<svg style="background-color:rgba(0,0,0,0);-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="offer-arrow">
-<g clip-path="url(#clip0_178_1594)">
+<svg style={{ backgroundColor: "rgba(0,0,0,0)", WebkitTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", MozTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", msTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", transform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" }} xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="offer-arrow">
+<g clipPath="url(#clip0_178_1594)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -587,15 +676,15 @@
 </div>
 </div>
 </div>
-<div text-animation="" class="offer-line">
+<div text-animation="true" className="offer-line">
 </div>
-<div text-animation="" class="offer-card w-dyn-list">
-<div role="list" class="offer-list w-dyn-items">
-<div role="listitem" class="offer-item w-dyn-item">
-<a aria-label="Link Block" data-w-id="3339c165-693a-82eb-36c1-522e2c499b1c" href="#services" class="offer-wrap w-inline-block">
-<div style="color:rgb(40,40,40)" class="offer-wrapp">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 52 52" fill="none" class="offer-icon">
-<g clip-path="url(#clip0_25_1249)">
+<div text-animation="true" className="offer-card w-dyn-list">
+<div role="list" className="offer-list w-dyn-items">
+<div role="listitem" className="offer-item w-dyn-item">
+<a aria-label="Link Block" data-w-id="3339c165-693a-82eb-36c1-522e2c499b1c" href="#services" className="offer-wrap w-inline-block">
+<div style={{ color: "rgb(40,40,40)" }} className="offer-wrapp">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 52 52" fill="none" className="offer-icon">
+<g clipPath="url(#clip0_25_1249)">
 <path d="M47.4943 47.6376C46.4286 46.1396 44.8866 45.0723 43.1549 44.5825L36.7522 29.2364C36.1847 27.8762 35.1806 26.7958 33.9418 26.1271C34.3864 25.83 34.7987 25.4815 35.167 25.0845L45.1331 14.3368C45.7606 13.658 46.0781 12.7404 46.0041 11.8192C45.9779 11.4918 45.902 11.1731 45.7836 10.872C45.948 10.5775 46.0787 10.2638 46.1733 9.93404C46.8085 7.72044 45.6328 5.42946 43.5485 4.79197C43.3103 2.665 41.7961 0.815295 39.689 0.210811C38.3093 -0.184865 36.8575 -0.020034 35.6018 0.67565C34.3461 1.37144 33.4365 2.51449 33.0404 3.89448C32.8202 4.66207 32.7741 5.4516 32.8958 6.21746L32.1156 6.97063C30.9915 8.05579 30.3571 9.51378 30.3296 11.0762C30.328 11.1707 30.3287 11.265 30.3315 11.3589C26.5354 9.88214 22.108 10.7263 19.1196 13.6962L11.7893 20.9809C10.3198 22.4413 9.47695 24.4671 9.47695 26.5389C9.47695 28.838 10.4724 30.9088 12.0547 32.3434H5.00832C4.4474 32.3434 3.99272 32.7982 3.99272 33.359V50.9842C3.99272 51.545 4.4474 51.9998 5.00832 51.9998H10.5941C11.155 51.9998 11.6097 51.545 11.6097 50.9842C11.6097 50.4234 11.155 49.9686 10.5941 49.9686H6.02392V34.3746H24.3047V49.9686H19.7345C19.1736 49.9686 18.7189 50.4234 18.7189 50.9842C18.7189 51.545 19.1736 51.9998 19.7345 51.9998H25.3203C25.8812 51.9998 26.3359 51.545 26.3359 50.9842V34.3746H28.4719L34.0445 45.4054L33.4089 47.7277C33.1282 48.7527 33.337 49.8252 33.9817 50.6702C34.6265 51.5151 35.6057 51.9998 36.6685 51.9998H45.244C46.2821 51.9998 47.2224 51.4267 47.6983 50.5042C48.1741 49.5817 48.0959 48.4833 47.4943 47.6376ZM43.6415 12.9579L43.3747 13.2464L41.3456 11.6505L41.7519 11.2108C42.2031 10.7226 42.967 10.6614 43.4904 11.0715C43.7766 11.2959 43.9503 11.619 43.9793 11.9814C44.0084 12.344 43.8884 12.6908 43.6415 12.9579ZM34.9929 4.45469C35.5014 2.68257 37.3568 1.65458 39.1288 2.1632C40.6246 2.59239 41.6402 4.02956 41.5437 5.58048C41.5268 5.85215 41.6197 6.11925 41.8014 6.32186C41.9832 6.52437 42.2387 6.64553 42.5106 6.65813C42.6522 6.66463 42.7914 6.68727 42.924 6.72536C43.9089 7.008 44.4816 8.07489 44.2704 9.16513C43.0369 8.50387 41.4801 8.68912 40.4395 9.65404C40.4106 9.56619 40.3864 9.4761 40.3684 9.38338C40.3142 9.10541 40.1464 8.86248 39.9054 8.71359C39.6642 8.56461 39.3717 8.52327 39.0992 8.59914C38.5066 8.76417 37.8792 8.76133 37.2845 8.5906C36.426 8.34432 35.7149 7.77843 35.2821 6.99734C34.8492 6.21624 34.7465 5.31327 34.9929 4.45469ZM32.7307 12.8227C32.4837 12.2996 32.35 11.7075 32.3605 11.112C32.3785 10.0922 32.7925 9.14045 33.5263 8.43197L33.6843 8.27943C34.389 9.38074 35.4562 10.1792 36.7243 10.5431C37.3638 10.7265 38.0277 10.7896 38.6825 10.731C38.7607 10.9012 38.8508 11.065 38.9508 11.222L35.0979 14.8423C34.4658 14.6566 33.8941 14.311 33.4311 13.8314C33.1446 13.5345 32.9052 13.1836 32.7307 12.8227ZM20.5514 15.1369C23.3559 12.35 27.73 11.8848 31.0455 13.9868C31.2936 14.4387 31.6021 14.8612 31.9699 15.2422C32.4123 15.7005 32.9202 16.0784 33.4748 16.3675L30.9601 18.7305L29.8315 16.1462C29.6072 15.6321 29.0085 15.3973 28.4944 15.622C27.9803 15.8464 27.7456 16.445 27.9702 16.9591L29.6751 20.8635C29.8073 21.166 30.0782 21.3856 30.4017 21.4519C30.7253 21.518 31.0606 21.4234 31.3012 21.1971L39.9065 13.1113L41.9886 14.7429L33.6775 23.703C32.8918 24.5502 31.8272 25.0916 30.6797 25.2277C29.2254 25.4003 27.8293 24.6844 27.1198 23.4048L25.0577 19.6856C24.7858 19.195 24.1676 19.0179 23.6771 19.2898C23.1865 19.5619 23.0094 20.18 23.2813 20.6705L25.032 23.8282L23.1532 25.4042C22.415 25.4091 21.8171 25.4135 21.4461 25.4163L15.7747 19.8839L20.5514 15.1369ZM30.0032 32.9011C29.8304 32.559 29.4798 32.3434 29.0967 32.3434H17.3127C14.112 32.3434 11.5081 29.7395 11.5081 26.5389C11.5081 25.0043 12.1324 23.5035 13.221 22.4216L14.3338 21.3158L20.327 27.1619C20.5187 27.349 20.7737 27.4512 21.0444 27.4506C21.0687 27.4503 28.6652 27.402 30.9574 27.4051C32.6769 27.4063 34.2157 28.432 34.8775 30.0184L40.8281 44.2809H35.7523L30.0032 32.9011ZM45.8931 49.573C45.8318 49.6919 45.6457 49.9686 45.244 49.9686H36.6685C36.2444 49.9686 35.8538 49.7752 35.5965 49.438C35.3391 49.1008 35.2558 48.6731 35.368 48.264L35.9023 46.312H40.987C42.9103 46.312 44.7242 47.2477 45.839 48.815C46.0721 49.1423 45.9545 49.4541 45.8931 49.573Z" fill="currentColor">
 </path>
 <path d="M15.1643 52C15.7252 52 16.1799 51.5453 16.1799 50.9844C16.1799 50.4235 15.7252 49.9688 15.1643 49.9688C14.6034 49.9688 14.1487 50.4235 14.1487 50.9844C14.1487 51.5453 14.6034 52 15.1643 52Z" fill="currentColor">
@@ -608,10 +697,10 @@
 </clipPath>
 </defs>
 </svg>
-<div class="offer-name">Workshops & Webinars</div>
+<div className="offer-name">Workshops & Webinars</div>
 </div>
-<svg style="background-color:rgba(0,0,0,0);-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="offer-arrow">
-<g clip-path="url(#clip0_178_1594)">
+<svg style={{ backgroundColor: "rgba(0,0,0,0)", WebkitTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", MozTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", msTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", transform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" }} xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="offer-arrow">
+<g clipPath="url(#clip0_178_1594)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -626,15 +715,15 @@
 </div>
 </div>
 </div>
-<div text-animation="" class="offer-line">
+<div text-animation="true" className="offer-line">
 </div>
-<div text-animation="" class="offer-card w-dyn-list">
-<div role="list" class="offer-list w-dyn-items">
-<div role="listitem" class="offer-item w-dyn-item">
-<a aria-label="Link Block" data-w-id="1eee4f3e-adc6-b13b-ba1f-10e318e9279d" href="#services" class="offer-wrap w-inline-block">
-<div style="color:rgb(40,40,40)" class="offer-wrapp">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 52 52" fill="none" class="offer-icon">
-<g clip-path="url(#clip0_25_1255)">
+<div text-animation="true" className="offer-card w-dyn-list">
+<div role="list" className="offer-list w-dyn-items">
+<div role="listitem" className="offer-item w-dyn-item">
+<a aria-label="Link Block" data-w-id="1eee4f3e-adc6-b13b-ba1f-10e318e9279d" href="#services" className="offer-wrap w-inline-block">
+<div style={{ color: "rgb(40,40,40)" }} className="offer-wrapp">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 52 52" fill="none" className="offer-icon">
+<g clipPath="url(#clip0_25_1255)">
 <path d="M28.4591 25.0219L29.4215 25.453C29.5562 25.5134 29.6973 25.542 29.836 25.542C30.2241 25.542 30.5946 25.3183 30.7635 24.9412C30.9928 24.4293 30.7637 23.8285 30.2518 23.5992L29.2894 23.168C28.7775 22.9383 28.1767 23.1678 27.9474 23.6797C27.7181 24.1917 27.9472 24.7925 28.4591 25.0219Z" fill="currentColor">
 </path>
 <path d="M22.164 25.542C22.3027 25.542 22.4438 25.5133 22.5786 25.453L23.541 25.0219C24.0528 24.7926 24.282 24.1917 24.0526 23.6798C23.8233 23.1679 23.2224 22.9387 22.7106 23.1682L21.7482 23.5993C21.2363 23.8286 21.0072 24.4295 21.2365 24.9413C21.4054 25.3183 21.7759 25.542 22.164 25.542Z" fill="currentColor">
@@ -661,10 +750,10 @@
 </clipPath>
 </defs>
 </svg>
-<div class="offer-name">Corporate Bookings</div>
+<div className="offer-name">Corporate Bookings</div>
 </div>
-<svg style="background-color:rgba(0,0,0,0);-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="offer-arrow">
-<g clip-path="url(#clip0_178_1594)">
+<svg style={{ backgroundColor: "rgba(0,0,0,0)", WebkitTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", MozTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", msTransform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)", transform: "translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" }} xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="offer-arrow">
+<g clipPath="url(#clip0_178_1594)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -684,36 +773,36 @@
 </div>
 </div>
 </section>
-<section class="choose-section">
-<div class="section-space">
-<div class="w-layout-blockcontainer main-container w-container">
-<div class="choose-block">
-<div class="choose-text-block">
-<div class="choose-info-block">
-<div text-animation="" class="choose-info">
-<div data-wf--section-info--variant="dark" class="section-info">{ Why Calendify? }</div>
+<section className="choose-section">
+<div className="section-space">
+<div className="w-layout-blockcontainer main-container w-container">
+<div className="choose-block">
+<div className="choose-text-block">
+<div className="choose-info-block">
+<div text-animation="true" className="choose-info">
+<div data-wf--section-info--variant="dark" className="section-info">Why Calendify?</div>
 </div>
 </div>
-<div class="choose-title-block">
-<h3 text-animation="" class="choose-title">Designed for Modern Indian Consultants</h3>
+<div className="choose-title-block">
+<h3 text-animation="true" className="choose-title">Designed for Modern Indian Consultants</h3>
 </div>
-<div class="choose-except-block">
-<div text-animation="" class="choose-except">A premium scheduling experience that integrates Razorpay UPI checkouts with real-time Google Calendar syncing.</div>
+<div className="choose-except-block">
+<div text-animation="true" className="choose-except">A premium scheduling experience that integrates Razorpay UPI checkouts with real-time Google Calendar syncing.</div>
 </div>
 </div>
-<div data-w-id="820f31b5-1b90-4c2f-0cc8-5e927b58fa6e" class="choose-card-block">
-<div class="choose-card item-one">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="choose-icon">
+<div data-w-id="820f31b5-1b90-4c2f-0cc8-5e927b58fa6e" className="choose-card-block">
+<div className="choose-card item-one">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" className="choose-icon">
 <path d="M23.2969 11.2969H22.351C22.7857 10.4329 23.0156 9.473 23.0156 8.47771C23.0156 6.79977 22.3622 5.22224 21.1757 4.03574C19.9892 2.84924 18.4117 2.1958 16.7338 2.1958C15.0558 2.1958 13.4783 2.84924 12.2918 4.03574L12 4.32754L11.7082 4.03579C10.5217 2.84929 8.94422 2.19585 7.26623 2.19585C5.58825 2.19585 4.01077 2.84929 2.82427 4.03574C1.63781 5.22224 0.984375 6.79977 0.984375 8.47771C0.984375 9.47296 1.2143 10.4329 1.64897 11.2969H0.703125C0.314812 11.2969 0 11.6117 0 12C0 12.3883 0.314812 12.7031 0.703125 12.7031H2.61778C2.68477 12.7766 2.75353 12.8489 2.82431 12.9197L11.5028 21.5982C11.6401 21.7355 11.8201 21.8042 12 21.8042C12.1799 21.8042 12.3599 21.7355 12.4972 21.5982L21.1757 12.9197C21.2465 12.8489 21.3152 12.7766 21.3822 12.7031H23.2969C23.6852 12.7031 24 12.3883 24 12C24 11.6117 23.6852 11.2969 23.2969 11.2969ZM2.39062 8.47771C2.39062 7.17538 2.89777 5.951 3.81867 5.0301C4.73953 4.10919 5.96391 3.60205 7.26623 3.60205C8.56856 3.60205 9.79294 4.10919 10.7138 5.0301L11.5028 5.81905C11.7773 6.09364 12.2226 6.09364 12.4972 5.81905L13.2861 5.0301C14.207 4.10919 15.4314 3.60205 16.7337 3.60205C18.036 3.60205 19.2604 4.10919 20.1813 5.0301C21.1022 5.951 21.6094 7.17538 21.6094 8.47771C21.6094 9.5023 21.2953 10.4786 20.7129 11.2969H17.0276L15.4534 8.81127C15.3215 8.603 15.0904 8.47935 14.8437 8.48455C14.5973 8.49004 14.3717 8.62414 14.2492 8.83808L11.9441 12.8628L8.97094 6.99472C8.84709 6.75027 8.59153 6.59966 8.31867 6.60983C8.04483 6.61958 7.80159 6.78758 7.69547 7.04024L5.9077 11.2969H3.28706C2.70473 10.4786 2.39062 9.50235 2.39062 8.47771ZM12 20.1066L4.59647 12.7031H6.375C6.65812 12.7031 6.91364 12.5333 7.02328 12.2723L8.40347 8.98611L11.2791 14.6616C11.3959 14.8922 11.6298 15.0401 11.8883 15.0467C11.8943 15.0468 11.9003 15.0469 11.9063 15.0469C12.1579 15.0469 12.3909 14.9123 12.5164 14.6932L14.8897 10.5495L16.0466 12.3763C16.1755 12.5797 16.3997 12.7031 16.6406 12.7031H19.4035L12 20.1066Z" fill="currentColor">
 </path>
 </svg>
-<div class="choose-wrap">
-<div class="choose-name">Direct Calendar Sync</div>
-<div class="choose-content">Securely syncs with your Google Calendar to read busy blocks and automatically write confirmed bookings.</div>
+<div className="choose-wrap">
+<div className="choose-name">Direct Calendar Sync</div>
+<div className="choose-content">Securely syncs with your Google Calendar to read busy blocks and automatically write confirmed bookings.</div>
 </div>
 </div>
-<div class="choose-card item-two">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 23 24" fill="none" class="choose-icon">
+<div className="choose-card item-two">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 23 24" fill="none" className="choose-icon">
 <path d="M11.0538 24C10.7164 23.9997 10.3846 23.9132 10.09 23.7487L6.2687 21.6257C4.36926 20.5696 2.78656 19.0251 1.68441 17.1521C0.58227 15.279 0.000735815 13.1454 2.13166e-07 10.9721V5.08152C-0.000227175 4.59112 0.181472 4.11807 0.509933 3.75392C0.838394 3.38977 1.29026 3.16041 1.77809 3.11023C3.29823 2.94909 4.79434 2.61098 6.23604 2.10276C7.55748 1.63585 8.82504 1.02861 10.017 0.291454C10.3291 0.100849 10.6882 0 11.0539 0C11.4195 0 11.7781 0.100849 12.0902 0.291454C13.2823 1.02851 14.5501 1.63574 15.8716 2.10276C17.3133 2.61099 18.8094 2.94911 20.3295 3.11027C20.8174 3.16045 21.2692 3.3898 21.5977 3.75394C21.9262 4.11809 22.1079 4.59113 22.1076 5.08152V10.9721C22.1069 13.1454 21.5254 15.279 20.4232 17.1521C19.3211 19.0252 17.7384 20.5697 15.8389 21.6257L12.0176 23.7487C11.723 23.9132 11.3912 23.9997 11.0538 24ZM10.9115 1.73847C9.61569 2.53892 8.23794 3.19847 6.80179 3.70585C5.2353 4.2588 3.60941 4.62629 1.95739 4.80082C1.88716 4.80683 1.82177 4.83904 1.77419 4.89104C1.72662 4.94304 1.70034 5.01104 1.70059 5.08152V10.9721C1.70126 12.8421 2.20167 14.6779 3.15004 16.2896C4.0984 17.9012 5.46025 19.2302 7.09463 20.1388L10.916 22.2618C10.958 22.2857 11.0055 22.2983 11.0538 22.2983C11.1022 22.2983 11.1497 22.2857 11.1917 22.2618L15.013 20.1388C16.6474 19.2302 18.0092 17.9012 18.9576 16.2896C19.906 14.6779 20.4064 12.8421 20.407 10.9721V5.08152C20.4073 5.01104 20.381 4.94304 20.3334 4.89105C20.2858 4.83905 20.2204 4.80685 20.1502 4.80086C18.4982 4.62633 16.8723 4.25883 15.3058 3.70588C13.8696 3.19849 12.4919 2.53893 11.196 1.73847C11.1532 1.7124 11.1039 1.6986 11.0537 1.6986C11.0036 1.6986 10.9544 1.7124 10.9115 1.73847Z" fill="currentColor">
 </path>
 <path d="M13.8881 17.926H8.21949C7.54318 17.9253 6.89478 17.6563 6.41656 17.1781C5.93834 16.6999 5.66935 16.0515 5.66861 15.3752V11.974C5.66935 11.2977 5.93834 10.6493 6.41656 10.171C6.89478 9.69282 7.54318 9.42383 8.21949 9.4231H13.8881C14.5644 9.42383 15.2128 9.69282 15.691 10.171C16.1693 10.6493 16.4383 11.2977 16.439 11.974V15.3752C16.4383 16.0515 16.1693 16.6999 15.691 17.1781C15.2128 17.6563 14.5644 17.9253 13.8881 17.926ZM8.21949 11.1237C7.99406 11.1239 7.77792 11.2136 7.61852 11.373C7.45911 11.5324 7.36945 11.7485 7.3692 11.974V15.3752C7.36945 15.6006 7.45911 15.8167 7.61852 15.9761C7.77792 16.1355 7.99406 16.2252 8.21949 16.2254H13.8881C14.1136 16.2252 14.3297 16.1355 14.4891 15.9761C14.6485 15.8167 14.7382 15.6006 14.7384 15.3752V11.974C14.7382 11.7485 14.6485 11.5324 14.4891 11.373C14.3297 11.2136 14.1136 11.1239 13.8881 11.1237H8.21949Z" fill="currentColor">
@@ -721,13 +810,13 @@
 <path d="M13.3212 11.1239H8.78633C8.56084 11.1239 8.34459 11.0343 8.18515 10.8748C8.0257 10.7154 7.9361 10.4991 7.93604 10.2736V8.00617C7.93604 7.17929 8.26451 6.38628 8.8492 5.80159C9.43389 5.2169 10.2269 4.88843 11.0538 4.88843C11.8807 4.88843 12.6737 5.2169 13.2584 5.80159C13.843 6.38628 14.1715 7.17929 14.1715 8.00617V10.2736C14.1715 10.4991 14.0819 10.7154 13.9224 10.8748C13.763 11.0343 13.5467 11.1239 13.3212 11.1239ZM9.63662 9.42333H12.4709V8.00617C12.4709 7.63032 12.3216 7.26986 12.0559 7.00409C11.7901 6.73832 11.4296 6.58902 11.0538 6.58902C10.6779 6.58902 10.3175 6.73832 10.0517 7.00409C9.78593 7.26986 9.63662 7.63032 9.63662 8.00617V9.42333Z" fill="currentColor">
 </path>
 </svg>
-<div class="choose-wrap">
-<div class="choose-name">Razorpay Payments</div>
-<div class="choose-content">Process upfront payments via Razorpay (UPI, cards) before booking is confirmed, eliminating no-shows.</div>
+<div className="choose-wrap">
+<div className="choose-name">Razorpay Payments</div>
+<div className="choose-content">Process upfront payments via Razorpay (UPI, cards) before booking is confirmed, eliminating no-shows.</div>
 </div>
 </div>
-<div class="choose-card item-three">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 32 32" fill="none" class="choose-icon">
+<div className="choose-card item-three">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 32 32" fill="none" className="choose-icon">
 <path d="M15.0434 17.5124C14.7739 17.5124 14.5516 17.7314 14.5516 18.0042V20.6451C14.5516 21.9655 13.4737 23.04 12.1533 23.04C11.0922 23.04 10.1726 22.3562 9.8661 21.3423C9.82568 21.2042 9.72463 21.0931 9.59326 21.0358C9.46189 20.9785 9.31368 20.9819 9.18231 21.0425C8.24252 21.4939 7.12084 21.1267 6.62905 20.2004C6.25852 19.5065 6.3461 18.6644 6.84463 18.0581C6.85136 18.0514 6.8581 18.0413 6.86484 18.0345C7.02315 17.8223 6.97936 17.5192 6.77052 17.3575C6.73347 17.3272 6.69305 17.3069 6.65263 17.2901C5.93852 16.8724 5.63873 15.9933 5.95873 15.2219C6.20463 14.629 6.75368 14.2383 7.39368 14.2013C7.46105 14.1979 7.52505 14.181 7.58568 14.1507C7.70694 14.0901 7.79789 13.9823 7.83494 13.8509C7.87536 13.7196 7.85515 13.5815 7.78778 13.4636C7.65978 13.2446 7.59242 12.992 7.59242 12.736C7.59242 11.9377 8.24252 11.2876 9.04084 11.2876C9.11157 11.2876 9.17894 11.2943 9.24631 11.3044C9.50905 11.3448 9.74821 11.1663 9.79873 10.9103C10.0109 9.78189 11.0013 8.96336 12.1533 8.96336C13.4737 8.96336 14.5482 10.0379 14.5482 11.3583V14.3629C14.5482 14.6324 14.7672 14.8547 15.04 14.8547C15.3128 14.8547 15.5318 14.6358 15.5318 14.3629V11.3583C15.5318 9.49894 14.016 7.98315 12.1566 7.98315C10.6813 7.98315 9.39115 8.93979 8.94652 10.3107C7.65305 10.3646 6.61894 11.4324 6.61894 12.7394C6.61894 12.9448 6.64589 13.1469 6.69642 13.3457C5.96547 13.5747 5.36589 14.1137 5.05936 14.848C4.608 15.9326 4.928 17.1486 5.79368 17.8762C5.31873 18.7318 5.29852 19.776 5.7701 20.6619C6.42357 21.8914 7.82147 22.4707 9.11831 22.1103C9.67073 23.269 10.8362 24.0202 12.1566 24.0202C14.0194 24.0202 15.5352 22.5078 15.5352 20.6451V18.0042C15.5352 17.7347 15.3162 17.5124 15.0434 17.5124Z" fill="currentColor">
 </path>
 <path d="M12.9617 14.4808C13.1806 14.3191 13.2278 14.0126 13.0661 13.797C12.9044 13.5781 12.5979 13.5309 12.3823 13.6926L9.50568 15.8046C9.38105 15.8955 9.30695 16.0437 9.30695 16.1987C9.30695 16.3536 9.38105 16.5018 9.50568 16.5928L12.3823 18.7048C12.4699 18.7688 12.5709 18.7991 12.672 18.7991C12.8236 18.7991 12.9718 18.7284 13.0661 18.6004C13.2278 18.3814 13.1806 18.0749 12.9617 17.9166L11.2909 16.6905H20.6754L19.0046 17.9166C18.7857 18.0783 18.7385 18.3848 18.9002 18.6004C18.9979 18.7317 19.1461 18.7991 19.2943 18.7991C19.3954 18.7991 19.4964 18.7688 19.584 18.7048L22.4606 16.5928C22.5853 16.5018 22.6594 16.3536 22.6594 16.1987C22.6594 16.0437 22.5853 15.8955 22.4606 15.8046L19.584 13.6926C19.3651 13.5309 19.0585 13.5781 18.9002 13.797C18.7385 14.016 18.7857 14.3225 19.0046 14.4808L20.6754 15.7069H11.2909L12.9617 14.4808Z" fill="currentColor">
@@ -735,42 +824,42 @@
 <path d="M26.9271 14.8445C26.6273 14.1237 26.0177 13.578 25.2901 13.3422C25.3406 13.1435 25.3676 12.9414 25.3676 12.7325C25.3676 11.4256 24.3301 10.3578 23.04 10.3039C22.592 8.93295 21.3052 7.97632 19.8299 7.97632C17.9671 7.97632 16.4547 9.48874 16.4547 11.3515V14.3561C16.4547 14.6256 16.6737 14.8479 16.9465 14.8479C17.2193 14.8479 17.4383 14.6289 17.4383 14.3561V11.3515C17.4383 10.0311 18.5128 8.95653 19.8332 8.95653C20.9852 8.95653 21.9756 9.77505 22.1878 10.9035C22.2349 11.1628 22.4774 11.338 22.7402 11.2976C22.8076 11.2875 22.8749 11.2807 22.9457 11.2807C23.744 11.2807 24.3941 11.9308 24.3941 12.7292C24.3941 12.9852 24.3267 13.2378 24.1987 13.4567C24.1313 13.5746 24.1145 13.7127 24.1516 13.8441C24.1886 13.9755 24.2829 14.0833 24.4042 14.1439C24.4648 14.1742 24.5288 14.1911 24.5962 14.1944C25.2362 14.2315 25.7852 14.6222 26.0311 15.2151C26.3545 15.9898 26.0513 16.8757 25.3271 17.29C25.2901 17.3068 25.2564 17.3271 25.2227 17.354C25.0139 17.5157 24.9734 17.8188 25.1318 18.0344C25.1385 18.0445 25.1486 18.0546 25.1553 18.0647C25.6471 18.6711 25.7313 19.5064 25.3642 20.1969C24.8724 21.1199 23.7541 21.4904 22.8109 21.0391C22.6829 20.9784 22.5313 20.9751 22.4 21.0323C22.2686 21.0896 22.1709 21.2007 22.1271 21.3388C21.8206 22.3527 20.901 23.0365 19.84 23.0365C18.5162 23.0365 17.4417 21.962 17.4417 20.6416V18.0007C17.4417 17.7313 17.2227 17.509 16.9499 17.509C16.677 17.509 16.4581 17.7279 16.4581 18.0007V20.6416C16.4581 22.5009 17.9739 24.0167 19.8366 24.0167C21.157 24.0167 22.3225 23.2689 22.8749 22.1068C24.1718 22.4639 25.5697 21.8879 26.2231 20.6584C26.6947 19.7725 26.6745 18.7283 26.1996 17.8727C27.0652 17.1452 27.3852 15.9292 26.9339 14.8445H26.9271Z" fill="currentColor">
 </path>
 </svg>
-<div class="choose-wrap">
-<div class="choose-name">Intelligent Buffers</div>
-<div class="choose-content">Configure timezone-agnostic availability rules, 10-15 min gap buffers, and a 4-hour minimum notice.</div>
+<div className="choose-wrap">
+<div className="choose-name">Intelligent Buffers</div>
+<div className="choose-content">Configure timezone-agnostic availability rules, 10-15 min gap buffers, and a 4-hour minimum notice.</div>
 </div>
 </div>
-<div class="choose-card item-four">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="choose-icon">
+<div className="choose-card item-four">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" className="choose-icon">
 <path d="M21.6079 16.8495C21.5296 16.6078 21.334 16.4225 21.0887 16.3569L18.8269 15.7509L17.5525 13.788C17.4141 13.5748 17.1775 13.4463 16.9234 13.4463C16.6692 13.4463 16.4326 13.5748 16.2942 13.7876L15.0191 15.7509L12.7581 16.3569C12.5127 16.4225 12.3172 16.6082 12.2388 16.8495C12.1604 17.0912 12.2095 17.356 12.3692 17.5533L13.8428 19.3727L13.719 21.7106C13.7058 21.9644 13.8216 22.2075 14.0274 22.3569C14.1577 22.4514 14.3123 22.5001 14.4683 22.5001C14.5591 22.5001 14.6499 22.4836 14.7371 22.4503L16.9234 21.611L19.1089 22.4503C19.3462 22.5404 19.6121 22.5063 19.8186 22.3569C20.0237 22.2075 20.1402 21.9644 20.127 21.7109L20.0039 19.3727L21.4776 17.5533C21.6372 17.356 21.6863 17.0912 21.6079 16.8495ZM18.657 18.6523C18.5406 18.7963 18.4812 18.9786 18.4908 19.1636L18.5684 20.6357L17.1922 20.1073C17.1057 20.074 17.0142 20.0575 16.9234 20.0575C16.8325 20.0575 16.741 20.074 16.6546 20.1073L15.2783 20.6357L15.356 19.1639C15.3655 18.9786 15.3062 18.7966 15.1897 18.6523L14.2617 17.5068L15.6856 17.1252C15.8643 17.0773 16.0196 16.9648 16.1206 16.8096L16.9234 15.5736L17.7254 16.8092C17.8264 16.9648 17.9817 17.0773 18.1604 17.1252L19.585 17.5068L18.657 18.6523Z" fill="currentColor">
 </path>
 <path d="M4.63476 15.0557C5.07495 13.5099 6.5061 12.4303 8.11596 12.4303H15.5098C15.9243 12.4303 16.2598 12.0945 16.2598 11.6803C16.2598 11.3605 16.058 11.0919 15.7761 10.984C16.8644 9.98451 17.5518 8.55505 17.5518 6.9646C17.5518 3.95142 15.1003 1.5 12.0872 1.5C9.07397 1.5 6.62255 3.95142 6.62255 6.9646C6.62255 8.5264 7.28485 9.93352 8.33908 10.9303H8.11596C5.83959 10.9303 3.81445 12.4578 3.19189 14.6462L2.44189 17.2991C2.24926 17.9656 2.3789 18.6672 2.79711 19.2239C3.21826 19.7842 3.86206 20.1057 4.56372 20.1057H10.8816C11.2961 20.1057 11.6316 19.7699 11.6316 19.3557C11.6316 18.9415 11.2961 18.6057 10.8816 18.6057H4.56372C4.33813 18.6057 4.13085 18.5024 3.99609 18.3226C3.86352 18.1465 3.8225 17.9253 3.88403 17.7114L4.63476 15.0557ZM8.12255 6.9646C8.12255 4.77869 9.90087 3 12.0872 3C14.2734 3 16.0518 4.77869 16.0518 6.9646C16.0518 9.15051 14.2734 10.9288 12.0872 10.9288C9.90087 10.9288 8.12255 9.15051 8.12255 6.9646Z" fill="currentColor">
 </path>
 </svg>
-<div class="choose-wrap">
-<div class="choose-name">Instant Alerts & ICS</div>
-<div class="choose-content">Automated email confirmations via Resend and ICS invite attachments sent to both clients and consultants.</div>
+<div className="choose-wrap">
+<div className="choose-name">Instant Alerts & ICS</div>
+<div className="choose-content">Automated email confirmations via Resend and ICS invite attachments sent to both clients and consultants.</div>
 </div>
 </div>
 </div>
-<div class="choose-slider-block">
-<div data-delay="4000" data-animation="slide" class="global-slider w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
-<div class="global-mask w-slider-mask">
-<div class="global-slide w-slide">
-<div class="choose-card">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="choose-icon">
+<div className="choose-slider-block">
+<div data-delay="4000" data-animation="slide" className="global-slider w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
+<div className="global-mask w-slider-mask">
+<div className="global-slide w-slide">
+<div className="choose-card">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" className="choose-icon">
 <path d="M23.2969 11.2969H22.351C22.7857 10.4329 23.0156 9.473 23.0156 8.47771C23.0156 6.79977 22.3622 5.22224 21.1757 4.03574C19.9892 2.84924 18.4117 2.1958 16.7338 2.1958C15.0558 2.1958 13.4783 2.84924 12.2918 4.03574L12 4.32754L11.7082 4.03579C10.5217 2.84929 8.94422 2.19585 7.26623 2.19585C5.58825 2.19585 4.01077 2.84929 2.82427 4.03574C1.63781 5.22224 0.984375 6.79977 0.984375 8.47771C0.984375 9.47296 1.2143 10.4329 1.64897 11.2969H0.703125C0.314812 11.2969 0 11.6117 0 12C0 12.3883 0.314812 12.7031 0.703125 12.7031H2.61778C2.68477 12.7766 2.75353 12.8489 2.82431 12.9197L11.5028 21.5982C11.6401 21.7355 11.8201 21.8042 12 21.8042C12.1799 21.8042 12.3599 21.7355 12.4972 21.5982L21.1757 12.9197C21.2465 12.8489 21.3152 12.7766 21.3822 12.7031H23.2969C23.6852 12.7031 24 12.3883 24 12C24 11.6117 23.6852 11.2969 23.2969 11.2969ZM2.39062 8.47771C2.39062 7.17538 2.89777 5.951 3.81867 5.0301C4.73953 4.10919 5.96391 3.60205 7.26623 3.60205C8.56856 3.60205 9.79294 4.10919 10.7138 5.0301L11.5028 5.81905C11.7773 6.09364 12.2226 6.09364 12.4972 5.81905L13.2861 5.0301C14.207 4.10919 15.4314 3.60205 16.7337 3.60205C18.036 3.60205 19.2604 4.10919 20.1813 5.0301C21.1022 5.951 21.6094 7.17538 21.6094 8.47771C21.6094 9.5023 21.2953 10.4786 20.7129 11.2969H17.0276L15.4534 8.81127C15.3215 8.603 15.0904 8.47935 14.8437 8.48455C14.5973 8.49004 14.3717 8.62414 14.2492 8.83808L11.9441 12.8628L8.97094 6.99472C8.84709 6.75027 8.59153 6.59966 8.31867 6.60983C8.04483 6.61958 7.80159 6.78758 7.69547 7.04024L5.9077 11.2969H3.28706C2.70473 10.4786 2.39062 9.50235 2.39062 8.47771ZM12 20.1066L4.59647 12.7031H6.375C6.65812 12.7031 6.91364 12.5333 7.02328 12.2723L8.40347 8.98611L11.2791 14.6616C11.3959 14.8922 11.6298 15.0401 11.8883 15.0467C11.8943 15.0468 11.9003 15.0469 11.9063 15.0469C12.1579 15.0469 12.3909 14.9123 12.5164 14.6932L14.8897 10.5495L16.0466 12.3763C16.1755 12.5797 16.3997 12.7031 16.6406 12.7031H19.4035L12 20.1066Z" fill="currentColor">
 </path>
 </svg>
-<div class="choose-wrap">
-<div class="choose-name">Direct Calendar Sync</div>
-<div class="choose-content">Securely syncs with your Google Calendar to read busy blocks and automatically write confirmed bookings.</div>
+<div className="choose-wrap">
+<div className="choose-name">Direct Calendar Sync</div>
+<div className="choose-content">Securely syncs with your Google Calendar to read busy blocks and automatically write confirmed bookings.</div>
 </div>
 </div>
 </div>
-<div class="global-slide w-slide">
-<div class="choose-card">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 23 24" fill="none" class="choose-icon">
+<div className="global-slide w-slide">
+<div className="choose-card">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 23 24" fill="none" className="choose-icon">
 <path d="M11.0538 24C10.7164 23.9997 10.3846 23.9132 10.09 23.7487L6.2687 21.6257C4.36926 20.5696 2.78656 19.0251 1.68441 17.1521C0.58227 15.279 0.000735815 13.1454 2.13166e-07 10.9721V5.08152C-0.000227175 4.59112 0.181472 4.11807 0.509933 3.75392C0.838394 3.38977 1.29026 3.16041 1.77809 3.11023C3.29823 2.94909 4.79434 2.61098 6.23604 2.10276C7.55748 1.63585 8.82504 1.02861 10.017 0.291454C10.3291 0.100849 10.6882 0 11.0539 0C11.4195 0 11.7781 0.100849 12.0902 0.291454C13.2823 1.02851 14.5501 1.63574 15.8716 2.10276C17.3133 2.61099 18.8094 2.94911 20.3295 3.11027C20.8174 3.16045 21.2692 3.3898 21.5977 3.75394C21.9262 4.11809 22.1079 4.59113 22.1076 5.08152V10.9721C22.1069 13.1454 21.5254 15.279 20.4232 17.1521C19.3211 19.0252 17.7384 20.5697 15.8389 21.6257L12.0176 23.7487C11.723 23.9132 11.3912 23.9997 11.0538 24ZM10.9115 1.73847C9.61569 2.53892 8.23794 3.19847 6.80179 3.70585C5.2353 4.2588 3.60941 4.62629 1.95739 4.80082C1.88716 4.80683 1.82177 4.83904 1.77419 4.89104C1.72662 4.94304 1.70034 5.01104 1.70059 5.08152V10.9721C1.70126 12.8421 2.20167 14.6779 3.15004 16.2896C4.0984 17.9012 5.46025 19.2302 7.09463 20.1388L10.916 22.2618C10.958 22.2857 11.0055 22.2983 11.0538 22.2983C11.1022 22.2983 11.1497 22.2857 11.1917 22.2618L15.013 20.1388C16.6474 19.2302 18.0092 17.9012 18.9576 16.2896C19.906 14.6779 20.4064 12.8421 20.407 10.9721V5.08152C20.4073 5.01104 20.381 4.94304 20.3334 4.89105C20.2858 4.83905 20.2204 4.80685 20.1502 4.80086C18.4982 4.62633 16.8723 4.25883 15.3058 3.70588C13.8696 3.19849 12.4919 2.53893 11.196 1.73847C11.1532 1.7124 11.1039 1.6986 11.0537 1.6986C11.0036 1.6986 10.9544 1.7124 10.9115 1.73847Z" fill="currentColor">
 </path>
 <path d="M13.8881 17.926H8.21949C7.54318 17.9253 6.89478 17.6563 6.41656 17.1781C5.93834 16.6999 5.66935 16.0515 5.66861 15.3752V11.974C5.66935 11.2977 5.93834 10.6493 6.41656 10.171C6.89478 9.69282 7.54318 9.42383 8.21949 9.4231H13.8881C14.5644 9.42383 15.2128 9.69282 15.691 10.171C16.1693 10.6493 16.4383 11.2977 16.439 11.974V15.3752C16.4383 16.0515 16.1693 16.6999 15.691 17.1781C15.2128 17.6563 14.5644 17.9253 13.8881 17.926ZM8.21949 11.1237C7.99406 11.1239 7.77792 11.2136 7.61852 11.373C7.45911 11.5324 7.36945 11.7485 7.3692 11.974V15.3752C7.36945 15.6006 7.45911 15.8167 7.61852 15.9761C7.77792 16.1355 7.99406 16.2252 8.21949 16.2254H13.8881C14.1136 16.2252 14.3297 16.1355 14.4891 15.9761C14.6485 15.8167 14.7382 15.6006 14.7384 15.3752V11.974C14.7382 11.7485 14.6485 11.5324 14.4891 11.373C14.3297 11.2136 14.1136 11.1239 13.8881 11.1237H8.21949Z" fill="currentColor">
@@ -778,15 +867,15 @@
 <path d="M13.3212 11.1239H8.78633C8.56084 11.1239 8.34459 11.0343 8.18515 10.8748C8.0257 10.7154 7.9361 10.4991 7.93604 10.2736V8.00617C7.93604 7.17929 8.26451 6.38628 8.8492 5.80159C9.43389 5.2169 10.2269 4.88843 11.0538 4.88843C11.8807 4.88843 12.6737 5.2169 13.2584 5.80159C13.843 6.38628 14.1715 7.17929 14.1715 8.00617V10.2736C14.1715 10.4991 14.0819 10.7154 13.9224 10.8748C13.763 11.0343 13.5467 11.1239 13.3212 11.1239ZM9.63662 9.42333H12.4709V8.00617C12.4709 7.63032 12.3216 7.26986 12.0559 7.00409C11.7901 6.73832 11.4296 6.58902 11.0538 6.58902C10.6779 6.58902 10.3175 6.73832 10.0517 7.00409C9.78593 7.26986 9.63662 7.63032 9.63662 8.00617V9.42333Z" fill="currentColor">
 </path>
 </svg>
-<div class="choose-wrap">
-<div class="choose-name">Razorpay Payments</div>
-<div class="choose-content">Process upfront payments via Razorpay (UPI, cards) before booking is confirmed, eliminating no-shows.</div>
+<div className="choose-wrap">
+<div className="choose-name">Razorpay Payments</div>
+<div className="choose-content">Process upfront payments via Razorpay (UPI, cards) before booking is confirmed, eliminating no-shows.</div>
 </div>
 </div>
 </div>
-<div class="global-slide w-slide">
-<div class="choose-card">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 32 32" fill="none" class="choose-icon">
+<div className="global-slide w-slide">
+<div className="choose-card">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 32 32" fill="none" className="choose-icon">
 <path d="M15.0434 17.5124C14.7739 17.5124 14.5516 17.7314 14.5516 18.0042V20.6451C14.5516 21.9655 13.4737 23.04 12.1533 23.04C11.0922 23.04 10.1726 22.3562 9.8661 21.3423C9.82568 21.2042 9.72463 21.0931 9.59326 21.0358C9.46189 20.9785 9.31368 20.9819 9.18231 21.0425C8.24252 21.4939 7.12084 21.1267 6.62905 20.2004C6.25852 19.5065 6.3461 18.6644 6.84463 18.0581C6.85136 18.0514 6.8581 18.0413 6.86484 18.0345C7.02315 17.8223 6.97936 17.5192 6.77052 17.3575C6.73347 17.3272 6.69305 17.3069 6.65263 17.2901C5.93852 16.8724 5.63873 15.9933 5.95873 15.2219C6.20463 14.629 6.75368 14.2383 7.39368 14.2013C7.46105 14.1979 7.52505 14.181 7.58568 14.1507C7.70694 14.0901 7.79789 13.9823 7.83494 13.8509C7.87536 13.7196 7.85515 13.5815 7.78778 13.4636C7.65978 13.2446 7.59242 12.992 7.59242 12.736C7.59242 11.9377 8.24252 11.2876 9.04084 11.2876C9.11157 11.2876 9.17894 11.2943 9.24631 11.3044C9.50905 11.3448 9.74821 11.1663 9.79873 10.9103C10.0109 9.78189 11.0013 8.96336 12.1533 8.96336C13.4737 8.96336 14.5482 10.0379 14.5482 11.3583V14.3629C14.5482 14.6324 14.7672 14.8547 15.04 14.8547C15.3128 14.8547 15.5318 14.6358 15.5318 14.3629V11.3583C15.5318 9.49894 14.016 7.98315 12.1566 7.98315C10.6813 7.98315 9.39115 8.93979 8.94652 10.3107C7.65305 10.3646 6.61894 11.4324 6.61894 12.7394C6.61894 12.9448 6.64589 13.1469 6.69642 13.3457C5.96547 13.5747 5.36589 14.1137 5.05936 14.848C4.608 15.9326 4.928 17.1486 5.79368 17.8762C5.31873 18.7318 5.29852 19.776 5.7701 20.6619C6.42357 21.8914 7.82147 22.4707 9.11831 22.1103C9.67073 23.269 10.8362 24.0202 12.1566 24.0202C14.0194 24.0202 15.5352 22.5078 15.5352 20.6451V18.0042C15.5352 17.7347 15.3162 17.5124 15.0434 17.5124Z" fill="currentColor">
 </path>
 <path d="M12.9617 14.4808C13.1806 14.3191 13.2278 14.0126 13.0661 13.797C12.9044 13.5781 12.5979 13.5309 12.3823 13.6926L9.50568 15.8046C9.38105 15.8955 9.30695 16.0437 9.30695 16.1987C9.30695 16.3536 9.38105 16.5018 9.50568 16.5928L12.3823 18.7048C12.4699 18.7688 12.5709 18.7991 12.672 18.7991C12.8236 18.7991 12.9718 18.7284 13.0661 18.6004C13.2278 18.3814 13.1806 18.0749 12.9617 17.9166L11.2909 16.6905H20.6754L19.0046 17.9166C18.7857 18.0783 18.7385 18.3848 18.9002 18.6004C18.9979 18.7317 19.1461 18.7991 19.2943 18.7991C19.3954 18.7991 19.4964 18.7688 19.584 18.7048L22.4606 16.5928C22.5853 16.5018 22.6594 16.3536 22.6594 16.1987C22.6594 16.0437 22.5853 15.8955 22.4606 15.8046L19.584 13.6926C19.3651 13.5309 19.0585 13.5781 18.9002 13.797C18.7385 14.016 18.7857 14.3225 19.0046 14.4808L20.6754 15.7069H11.2909L12.9617 14.4808Z" fill="currentColor">
@@ -794,109 +883,109 @@
 <path d="M26.9271 14.8445C26.6273 14.1237 26.0177 13.578 25.2901 13.3422C25.3406 13.1435 25.3676 12.9414 25.3676 12.7325C25.3676 11.4256 24.3301 10.3578 23.04 10.3039C22.592 8.93295 21.3052 7.97632 19.8299 7.97632C17.9671 7.97632 16.4547 9.48874 16.4547 11.3515V14.3561C16.4547 14.6256 16.6737 14.8479 16.9465 14.8479C17.2193 14.8479 17.4383 14.6289 17.4383 14.3561V11.3515C17.4383 10.0311 18.5128 8.95653 19.8332 8.95653C20.9852 8.95653 21.9756 9.77505 22.1878 10.9035C22.2349 11.1628 22.4774 11.338 22.7402 11.2976C22.8076 11.2875 22.8749 11.2807 22.9457 11.2807C23.744 11.2807 24.3941 11.9308 24.3941 12.7292C24.3941 12.9852 24.3267 13.2378 24.1987 13.4567C24.1313 13.5746 24.1145 13.7127 24.1516 13.8441C24.1886 13.9755 24.2829 14.0833 24.4042 14.1439C24.4648 14.1742 24.5288 14.1911 24.5962 14.1944C25.2362 14.2315 25.7852 14.6222 26.0311 15.2151C26.3545 15.9898 26.0513 16.8757 25.3271 17.29C25.2901 17.3068 25.2564 17.3271 25.2227 17.354C25.0139 17.5157 24.9734 17.8188 25.1318 18.0344C25.1385 18.0445 25.1486 18.0546 25.1553 18.0647C25.6471 18.6711 25.7313 19.5064 25.3642 20.1969C24.8724 21.1199 23.7541 21.4904 22.8109 21.0391C22.6829 20.9784 22.5313 20.9751 22.4 21.0323C22.2686 21.0896 22.1709 21.2007 22.1271 21.3388C21.8206 22.3527 20.901 23.0365 19.84 23.0365C18.5162 23.0365 17.4417 21.962 17.4417 20.6416V18.0007C17.4417 17.7313 17.2227 17.509 16.9499 17.509C16.677 17.509 16.4581 17.7279 16.4581 18.0007V20.6416C16.4581 22.5009 17.9739 24.0167 19.8366 24.0167C21.157 24.0167 22.3225 23.2689 22.8749 22.1068C24.1718 22.4639 25.5697 21.8879 26.2231 20.6584C26.6947 19.7725 26.6745 18.7283 26.1996 17.8727C27.0652 17.1452 27.3852 15.9292 26.9339 14.8445H26.9271Z" fill="currentColor">
 </path>
 </svg>
-<div class="choose-wrap">
-<div class="choose-name">Intelligent Buffers</div>
-<div class="choose-content">Configure timezone-agnostic availability rules, 10-15 min gap buffers, and a 4-hour minimum notice.</div>
+<div className="choose-wrap">
+<div className="choose-name">Intelligent Buffers</div>
+<div className="choose-content">Configure timezone-agnostic availability rules, 10-15 min gap buffers, and a 4-hour minimum notice.</div>
 </div>
 </div>
 </div>
-<div class="global-slide w-slide">
-<div class="choose-card">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="choose-icon">
+<div className="global-slide w-slide">
+<div className="choose-card">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" className="choose-icon">
 <path d="M21.6079 16.8495C21.5296 16.6078 21.334 16.4225 21.0887 16.3569L18.8269 15.7509L17.5525 13.788C17.4141 13.5748 17.1775 13.4463 16.9234 13.4463C16.6692 13.4463 16.4326 13.5748 16.2942 13.7876L15.0191 15.7509L12.7581 16.3569C12.5127 16.4225 12.3172 16.6082 12.2388 16.8495C12.1604 17.0912 12.2095 17.356 12.3692 17.5533L13.8428 19.3727L13.719 21.7106C13.7058 21.9644 13.8216 22.2075 14.0274 22.3569C14.1577 22.4514 14.3123 22.5001 14.4683 22.5001C14.5591 22.5001 14.6499 22.4836 14.7371 22.4503L16.9234 21.611L19.1089 22.4503C19.3462 22.5404 19.6121 22.5063 19.8186 22.3569C20.0237 22.2075 20.1402 21.9644 20.127 21.7109L20.0039 19.3727L21.4776 17.5533C21.6372 17.356 21.6863 17.0912 21.6079 16.8495ZM18.657 18.6523C18.5406 18.7963 18.4812 18.9786 18.4908 19.1636L18.5684 20.6357L17.1922 20.1073C17.1057 20.074 17.0142 20.0575 16.9234 20.0575C16.8325 20.0575 16.741 20.074 16.6546 20.1073L15.2783 20.6357L15.356 19.1639C15.3655 18.9786 15.3062 18.7966 15.1897 18.6523L14.2617 17.5068L15.6856 17.1252C15.8643 17.0773 16.0196 16.9648 16.1206 16.8096L16.9234 15.5736L17.7254 16.8092C17.8264 16.9648 17.9817 17.0773 18.1604 17.1252L19.585 17.5068L18.657 18.6523Z" fill="currentColor">
 </path>
 <path d="M4.63476 15.0557C5.07495 13.5099 6.5061 12.4303 8.11596 12.4303H15.5098C15.9243 12.4303 16.2598 12.0945 16.2598 11.6803C16.2598 11.3605 16.058 11.0919 15.7761 10.984C16.8644 9.98451 17.5518 8.55505 17.5518 6.9646C17.5518 3.95142 15.1003 1.5 12.0872 1.5C9.07397 1.5 6.62255 3.95142 6.62255 6.9646C6.62255 8.5264 7.28485 9.93352 8.33908 10.9303H8.11596C5.83959 10.9303 3.81445 12.4578 3.19189 14.6462L2.44189 17.2991C2.24926 17.9656 2.3789 18.6672 2.79711 19.2239C3.21826 19.7842 3.86206 20.1057 4.56372 20.1057H10.8816C11.2961 20.1057 11.6316 19.7699 11.6316 19.3557C11.6316 18.9415 11.2961 18.6057 10.8816 18.6057H4.56372C4.33813 18.6057 4.13085 18.5024 3.99609 18.3226C3.86352 18.1465 3.8225 17.9253 3.88403 17.7114L4.63476 15.0557ZM8.12255 6.9646C8.12255 4.77869 9.90087 3 12.0872 3C14.2734 3 16.0518 4.77869 16.0518 6.9646C16.0518 9.15051 14.2734 10.9288 12.0872 10.9288C9.90087 10.9288 8.12255 9.15051 8.12255 6.9646Z" fill="currentColor">
 </path>
 </svg>
-<div class="choose-wrap">
-<div class="choose-name">Instant Alerts & ICS</div>
-<div class="choose-content">Automated email confirmations via Resend and ICS invite attachments sent to both clients and consultants.</div>
+<div className="choose-wrap">
+<div className="choose-name">Instant Alerts & ICS</div>
+<div className="choose-content">Automated email confirmations via Resend and ICS invite attachments sent to both clients and consultants.</div>
 </div>
 </div>
 </div>
 </div>
-<div class="global-arrow w-slider-arrow-left">
-<div class="w-icon-slider-left">
+<div className="global-arrow w-slider-arrow-left">
+<div className="w-icon-slider-left">
 </div>
 </div>
-<div class="global-arrow w-slider-arrow-right">
-<div class="w-icon-slider-right">
+<div className="global-arrow w-slider-arrow-right">
+<div className="w-icon-slider-right">
 </div>
 </div>
-<div class="global-nav w-slider-nav w-round w-num">
+<div className="global-nav w-slider-nav w-round w-num">
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section class="works-section">
-<div class="section-space">
-<div class="w-layout-blockcontainer main-container w-container">
-<div class="works-block">
-<div text-animation="" class="works-text-block">
-<div class="works-info-block">
-<div class="works-info">
-<div data-wf--section-info--variant="dark" class="section-info">{ Setup Flow }</div>
-</div>
-</div>
-<div class="works-title-block">
-<h3 class="works-title">Start Collecting Paid Bookings in 3 Simple Steps</h3>
-</div>
-</div>
-<div class="works-card-block">
-<div card-animation="" class="works-card">
-<div class="works-num">{ 1 }</div>
-<div class="works-name">Connect Google OAuth</div>
-<div class="works-except">Log in securely with Google OAuth to sync your calendar availability in real time.</div>
-</div>
-<div card-animation="" class="works-card">
-<div class="works-num">{ 2 }</div>
-<div class="works-name">Configure Services</div>
-<div class="works-except">Define your hourly session rates, buffer durations, and weekly availability rules.</div>
-</div>
-<div card-animation="" class="works-card">
-<div class="works-num">{ 3 }</div>
-<div class="works-name">Share Custom Link</div>
-<div class="works-except">Clients book time slots, pay instantly via Razorpay UPI, and the event writes directly to your calendar.</div>
 </div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section class="review-section">
-<div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e29049" class="review-height">
-<div class="review-sticky">
-<div class="section-space">
-<div class="review-block">
-<div class="review-text-block">
-<div class="w-layout-blockcontainer main-container w-container">
-<div class="review-text">
-<div text-animation="" class="review-details-block">
-<div class="review-info-block">
-<div class="review-info">
-<div data-wf--section-info--variant="dark" class="section-info">{ Testimonials }</div>
+<section className="works-section">
+<div className="section-space">
+<div className="w-layout-blockcontainer main-container w-container">
+<div className="works-block">
+<div text-animation="true" className="works-text-block">
+<div className="works-info-block">
+<div className="works-info">
+<div data-wf--section-info--variant="dark" className="section-info">Setup Flow</div>
 </div>
 </div>
-<div class="review-title-block">
-<h3 class="review-title">What Professional Consultants Are Saying</h3>
+<div className="works-title-block">
+<h3 className="works-title">Start Collecting Paid Bookings in 3 Simple Steps</h3>
 </div>
 </div>
-<div text-animation="" class="review-button-block">
-<div class="review-button">
-<a aria-label="Link Block" data-wf--button--variant="primary" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" class="button w-inline-block">
-<div class="button-block">
-<div class="button-text-block">
-<div class="button-wrap">
-<div class="button-text">Get Started</div>
-<div class="button-text">Get Started</div>
+<div className="works-card-block">
+<div card-animation="true" className="works-card">
+<div className="works-num">1</div>
+<div className="works-name">Connect Google OAuth</div>
+<div className="works-except">Log in securely with Google OAuth to sync your calendar availability in real time.</div>
+</div>
+<div card-animation="true" className="works-card">
+<div className="works-num">2</div>
+<div className="works-name">Configure Services</div>
+<div className="works-except">Define your hourly session rates, buffer durations, and weekly availability rules.</div>
+</div>
+<div card-animation="true" className="works-card">
+<div className="works-num">3</div>
+<div className="works-name">Share Custom Link</div>
+<div className="works-except">Clients book time slots, pay instantly via Razorpay UPI, and the event writes directly to your calendar.</div>
 </div>
 </div>
-<div class="button-icon-block">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="button-icon">
-<g clip-path="url(#clip0_118_93)">
+</div>
+</div>
+</div>
+</section>
+<section className="review-section">
+<div data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e29049" className="review-height">
+<div className="review-sticky">
+<div className="section-space">
+<div className="review-block">
+<div className="review-text-block">
+<div className="w-layout-blockcontainer main-container w-container">
+<div className="review-text">
+<div text-animation="true" className="review-details-block">
+<div className="review-info-block">
+<div className="review-info">
+<div data-wf--section-info--variant="dark" className="section-info">Testimonials</div>
+</div>
+</div>
+<div className="review-title-block">
+<h3 className="review-title">What Professional Consultants Are Saying</h3>
+</div>
+</div>
+<div text-animation="true" className="review-button-block">
+<div className="review-button">
+<a aria-label="Link Block" data-wf--button--variant="primary" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="#contact" className="button w-inline-block">
+<div className="button-block">
+<div className="button-text-block">
+<div className="button-wrap">
+<div className="button-text">Get Started</div>
+<div className="button-text">Get Started</div>
+</div>
+</div>
+<div className="button-icon-block">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="button-icon">
+<g clipPath="url(#clip0_118_93)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -915,15 +1004,15 @@
 </div>
 </div>
 </div>
-<div text-animation="" class="review-card-block">
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="bae4ff8e-1620-2073-5de0-191ac0a51f48" class="review-video w-background-video w-background-video-atom">
-<video id="bae4ff8e-1620-2073-5de0-191ac0a51f48-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e5acc770644466e9ef771c_naomi%20voss_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-wf-ignore="true">
+<div text-animation="true" className="review-card-block">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="bae4ff8e-1620-2073-5de0-191ac0a51f48" className="review-video w-background-video w-background-video-atom">
+<video id="bae4ff8e-1620-2073-5de0-191ac0a51f48-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -936,21 +1025,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="bae4ff8e-1620-2073-5de0-191ac0a51f48-video" class="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="bae4ff8e-1620-2073-5de0-191ac0a51f48-video" className="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -958,26 +1047,26 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“Calendify completely eliminated the scheduling back-and-forth. My clients book sessions and pay upfront via UPI, which increased my booking conversions by 40%.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e5acbb02cf0ff61f68abd4_45e2a36cbc72ec682eb0a284feeeb0be_Naomi%20Voss.webp" alt="Dr. Ramesh Sharma" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Dr. Ramesh Sharma</div>
-<div class="review-author-role">Senior counselor at <strong>Sharma Counseling Clinic</strong>
+<div className="review-wrap">
+<div className="review-except">“Calendify completely eliminated the scheduling back-and-forth. My clients book sessions and pay upfront via UPI, which increased my booking conversions by 40%.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e5acbb02cf0ff61f68abd4_45e2a36cbc72ec682eb0a284feeeb0be_Naomi%20Voss.webp" alt="Dr. Ramesh Sharma" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Dr. Ramesh Sharma</div>
+<div className="review-author-role">Senior counselor at <strong>Sharma Counseling Clinic</strong>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="f0ba1002-ceaa-b094-e370-721c07210235" class="review-video w-background-video w-background-video-atom">
-<video id="f0ba1002-ceaa-b094-e370-721c07210235-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e5adb47796e1b877a78b7a_john%20smith_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-wf-ignore="true">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="f0ba1002-ceaa-b094-e370-721c07210235" className="review-video w-background-video w-background-video-atom">
+<video id="f0ba1002-ceaa-b094-e370-721c07210235-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -990,21 +1079,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="f0ba1002-ceaa-b094-e370-721c07210235-video" class="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="f0ba1002-ceaa-b094-e370-721c07210235-video" className="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -1012,26 +1101,26 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“Syncing my Google Calendar directly with paid bookings has been a game-changer. Razorpay handles UPI checkouts flawlessly, and no-shows have dropped to absolute zero.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e5acbfbf58d69845e6c9bd_c3dbf5709bc928e6e70408291dd71fc5_John%20Smith.webp" alt="Ananya Nair" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Ananya Nair</div>
-<div class="review-author-role">HR Consultant at <strong>SoftSpace Solutions</strong>
+<div className="review-wrap">
+<div className="review-except">“Syncing my Google Calendar directly with paid bookings has been a game-changer. Razorpay handles UPI checkouts flawlessly, and no-shows have dropped to absolute zero.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e5acbfbf58d69845e6c9bd_c3dbf5709bc928e6e70408291dd71fc5_John%20Smith.webp" alt="Ananya Nair" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Ananya Nair</div>
+<div className="review-author-role">HR Consultant at <strong>SoftSpace Solutions</strong>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e854da3f8f1468342b0c3e_Aisha%20K_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e854da3f8f1468342b0c3e_Aisha%20K_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e854da3f8f1468342b0c3e_Aisha%20K_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="5f318317-6352-cd2c-fa80-9d73f7657681" class="review-video w-background-video w-background-video-atom">
-<video id="5f318317-6352-cd2c-fa80-9d73f7657681-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e854da3f8f1468342b0c3e_aisha%20k_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e854da3f8f1468342b0c3e_Aisha%20K_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e854da3f8f1468342b0c3e_Aisha%20K_webm.webm" data-wf-ignore="true">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e854da3f8f1468342b0c3e_Aisha%20K_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e854da3f8f1468342b0c3e_Aisha%20K_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e854da3f8f1468342b0c3e_Aisha%20K_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="5f318317-6352-cd2c-fa80-9d73f7657681" className="review-video w-background-video w-background-video-atom">
+<video id="5f318317-6352-cd2c-fa80-9d73f7657681-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e854da3f8f1468342b0c3e_Aisha%20K_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e854da3f8f1468342b0c3e_Aisha%20K_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -1044,21 +1133,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e854da3f8f1468342b0c3e_Aisha%20K_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="5f318317-6352-cd2c-fa80-9d73f7657681-video" class="w-backgroundvideo-backgroundvideoplaypausebutton w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="5f318317-6352-cd2c-fa80-9d73f7657681-video" className="w-backgroundvideo-backgroundvideoplaypausebutton w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -1066,26 +1155,26 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“The zero-maintenance serverless setup is incredible. I run my scheduling web app on high-performance free tiers with absolutely zero fixed monthly costs.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e8549a329792b28e307d49_d0ec3b16178b82d34b48ee654ecfda9f_Aisha%20K.webp" alt="Aisha K" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Vikram Malhotra</div>
-<div class="review-author-role">Financial Advisory Consultant at <strong>Axio Financials</strong>
+<div className="review-wrap">
+<div className="review-except">“The zero-maintenance serverless setup is incredible. I run my scheduling web app on high-performance free tiers with absolutely zero fixed monthly costs.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e8549a329792b28e307d49_d0ec3b16178b82d34b48ee654ecfda9f_Aisha%20K.webp" alt="Aisha K" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Vikram Malhotra</div>
+<div className="review-author-role">Financial Advisory Consultant at <strong>Axio Financials</strong>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e8550908998c1cfe23677f_Laura%20P_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e8550908998c1cfe23677f_Laura%20P_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e8550908998c1cfe23677f_Laura%20P_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e29073" class="review-video w-background-video w-background-video-atom">
-<video id="9596c1b5-15ab-7cb2-0551-04bf65e29073-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e8550908998c1cfe23677f_laura%20p_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e8550908998c1cfe23677f_Laura%20P_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e8550908998c1cfe23677f_Laura%20P_webm.webm" data-wf-ignore="true">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e8550908998c1cfe23677f_Laura%20P_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e8550908998c1cfe23677f_Laura%20P_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e8550908998c1cfe23677f_Laura%20P_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e29073" className="review-video w-background-video w-background-video-atom">
+<video id="9596c1b5-15ab-7cb2-0551-04bf65e29073-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e8550908998c1cfe23677f_Laura%20P_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e8550908998c1cfe23677f_Laura%20P_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -1098,21 +1187,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e8550908998c1cfe23677f_Laura%20P_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e29073-video" class="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e29073-video" className="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -1120,26 +1209,26 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“I customized my availability rules and buffer times in under ten minutes. The Resend email integration dispatches instant ICS invites to my clients immediately.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e8552cd20dbaa965ce70a3_13eded470249de7dcefed689823d757f_Laura%20P.webp" alt="Priya Sen" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Priya Sen</div>
-<div class="review-author-role">Career Coach at <strong>Independent Consultancy</strong>
+<div className="review-wrap">
+<div className="review-except">“I customized my availability rules and buffer times in under ten minutes. The Resend email integration dispatches instant ICS invites to my clients immediately.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e8552cd20dbaa965ce70a3_13eded470249de7dcefed689823d757f_Laura%20P.webp" alt="Priya Sen" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Priya Sen</div>
+<div className="review-author-role">Career Coach at <strong>Independent Consultancy</strong>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e85583928f5d27a39ca693_Michael%20T_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e85583928f5d27a39ca693_Michael%20T_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e85583928f5d27a39ca693_Michael%20T_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e2905d" class="review-video w-background-video w-background-video-atom">
-<video id="9596c1b5-15ab-7cb2-0551-04bf65e2905d-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e85583928f5d27a39ca693_michael%20t_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e85583928f5d27a39ca693_Michael%20T_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e85583928f5d27a39ca693_Michael%20T_webm.webm" data-wf-ignore="true">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e85583928f5d27a39ca693_Michael%20T_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e85583928f5d27a39ca693_Michael%20T_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e85583928f5d27a39ca693_Michael%20T_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e2905d" className="review-video w-background-video w-background-video-atom">
+<video id="9596c1b5-15ab-7cb2-0551-04bf65e2905d-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e85583928f5d27a39ca693_Michael%20T_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e85583928f5d27a39ca693_Michael%20T_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -1152,21 +1241,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e85583928f5d27a39ca693_Michael%20T_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e2905d-video" class="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e2905d-video" className="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -1174,30 +1263,30 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“Razorpay checkouts open seamlessly in mobile views. The timezone-agnostic calendar bookings are extremely robust for my international counseling clients.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e8557acc6040d39d512fc4_e1be28987d4c88dea5d3559a580b9d86_Michael%20T.webp" alt="Rahul Verma" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Rahul Verma</div>
-<div class="review-author-role">Corporate Life Coach at <strong>Vardhan Advisory</strong>
+<div className="review-wrap">
+<div className="review-except">“Razorpay checkouts open seamlessly in mobile views. The timezone-agnostic calendar bookings are extremely robust for my international counseling clients.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e8557acc6040d39d512fc4_e1be28987d4c88dea5d3559a580b9d86_Michael%20T.webp" alt="Rahul Verma" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Rahul Verma</div>
+<div className="review-author-role">Corporate Life Coach at <strong>Vardhan Advisory</strong>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div data-delay="4000" data-animation="slide" class="review-slider-block w-slider" text-animation="" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
-<div class="review-mask w-slider-mask">
-<div class="review-slide w-slide">
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e290ce" class="review-video w-background-video w-background-video-atom">
-<video id="9596c1b5-15ab-7cb2-0551-04bf65e290ce-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e5acc770644466e9ef771c_naomi%20voss_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-wf-ignore="true">
+<div data-delay="4000" data-animation="slide" className="review-slider-block w-slider" text-animation="" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="true">
+<div className="review-mask w-slider-mask">
+<div className="review-slide w-slide">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e290ce" className="review-video w-background-video w-background-video-atom">
+<video id="9596c1b5-15ab-7cb2-0551-04bf65e290ce-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -1210,21 +1299,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e290ce-video" class="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e290ce-video" className="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -1232,28 +1321,28 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“Calendify completely eliminated the scheduling back-and-forth. My clients book sessions and pay upfront via UPI, which increased my booking conversions by 40%.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e5acbb02cf0ff61f68abd4_45e2a36cbc72ec682eb0a284feeeb0be_Naomi%20Voss.webp" alt="Dr. Ramesh Sharma" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Dr. Ramesh Sharma</div>
-<div class="review-author-role">Senior counselor at <strong>Sharma Counseling Clinic</strong>
+<div className="review-wrap">
+<div className="review-except">“Calendify completely eliminated the scheduling back-and-forth. My clients book sessions and pay upfront via UPI, which increased my booking conversions by 40%.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e5acbb02cf0ff61f68abd4_45e2a36cbc72ec682eb0a284feeeb0be_Naomi%20Voss.webp" alt="Dr. Ramesh Sharma" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Dr. Ramesh Sharma</div>
+<div className="review-author-role">Senior counselor at <strong>Sharma Counseling Clinic</strong>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="review-slide w-slide">
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e290e5" class="review-video w-background-video w-background-video-atom">
-<video id="9596c1b5-15ab-7cb2-0551-04bf65e290e5-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e5adb47796e1b877a78b7a_john%20smith_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-wf-ignore="true">
+<div className="review-slide w-slide">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e290e5" className="review-video w-background-video w-background-video-atom">
+<video id="9596c1b5-15ab-7cb2-0551-04bf65e290e5-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -1266,21 +1355,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e290e5-video" class="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e290e5-video" className="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -1288,28 +1377,28 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“Syncing my Google Calendar directly with paid bookings has been a game-changer. Razorpay handles UPI checkouts flawlessly, and no-shows have dropped to absolute zero.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e5acbfbf58d69845e6c9bd_c3dbf5709bc928e6e70408291dd71fc5_John%20Smith.webp" alt="Ananya Nair" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Ananya Nair</div>
-<div class="review-author-role">HR Consultant at <strong>SoftSpace Solutions</strong>
+<div className="review-wrap">
+<div className="review-except">“Syncing my Google Calendar directly with paid bookings has been a game-changer. Razorpay handles UPI checkouts flawlessly, and no-shows have dropped to absolute zero.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e5acbfbf58d69845e6c9bd_c3dbf5709bc928e6e70408291dd71fc5_John%20Smith.webp" alt="Ananya Nair" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Ananya Nair</div>
+<div className="review-author-role">HR Consultant at <strong>SoftSpace Solutions</strong>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="review-slide w-slide">
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e290fc" class="review-video w-background-video w-background-video-atom">
-<video id="9596c1b5-15ab-7cb2-0551-04bf65e290fc-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e5acc770644466e9ef771c_naomi%20voss_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-wf-ignore="true">
+<div className="review-slide w-slide">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e290fc" className="review-video w-background-video w-background-video-atom">
+<video id="9596c1b5-15ab-7cb2-0551-04bf65e290fc-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -1322,21 +1411,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e290fc-video" class="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e290fc-video" className="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -1344,28 +1433,28 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“Calendify completely eliminated the scheduling back-and-forth. My clients book sessions and pay upfront via UPI, which increased my booking conversions by 40%.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e5acbb02cf0ff61f68abd4_45e2a36cbc72ec682eb0a284feeeb0be_Naomi%20Voss.webp" alt="Dr. Ramesh Sharma" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Dr. Ramesh Sharma</div>
-<div class="review-author-role">Senior counselor at <strong>Sharma Counseling Clinic</strong>
+<div className="review-wrap">
+<div className="review-except">“Calendify completely eliminated the scheduling back-and-forth. My clients book sessions and pay upfront via UPI, which increased my booking conversions by 40%.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e5acbb02cf0ff61f68abd4_45e2a36cbc72ec682eb0a284feeeb0be_Naomi%20Voss.webp" alt="Dr. Ramesh Sharma" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Dr. Ramesh Sharma</div>
+<div className="review-author-role">Senior counselor at <strong>Sharma Counseling Clinic</strong>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="review-slide w-slide">
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e29113" class="review-video w-background-video w-background-video-atom">
-<video id="9596c1b5-15ab-7cb2-0551-04bf65e29113-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e5adb47796e1b877a78b7a_john%20smith_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-wf-ignore="true">
+<div className="review-slide w-slide">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e29113" className="review-video w-background-video w-background-video-atom">
+<video id="9596c1b5-15ab-7cb2-0551-04bf65e29113-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5adb47796e1b877a78b7a_John%20Smith_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -1378,21 +1467,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5adb47796e1b877a78b7a_John%20Smith_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e29113-video" class="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e29113-video" className="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -1400,28 +1489,28 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“Syncing my Google Calendar directly with paid bookings has been a game-changer. Razorpay handles UPI checkouts flawlessly, and no-shows have dropped to absolute zero.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e5acbfbf58d69845e6c9bd_c3dbf5709bc928e6e70408291dd71fc5_John%20Smith.webp" alt="Ananya Nair" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Ananya Nair</div>
-<div class="review-author-role">HR Consultant at <strong>SoftSpace Solutions</strong>
+<div className="review-wrap">
+<div className="review-except">“Syncing my Google Calendar directly with paid bookings has been a game-changer. Razorpay handles UPI checkouts flawlessly, and no-shows have dropped to absolute zero.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e5acbfbf58d69845e6c9bd_c3dbf5709bc928e6e70408291dd71fc5_John%20Smith.webp" alt="Ananya Nair" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Ananya Nair</div>
+<div className="review-author-role">HR Consultant at <strong>SoftSpace Solutions</strong>
 </div>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="review-slide w-slide">
-<div class="review-card">
-<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e2912a" class="review-video w-background-video w-background-video-atom">
-<video id="9596c1b5-15ab-7cb2-0551-04bf65e2912a-video" style="background-image:url(" https:="" cdn.prod.website-files.com="" 69dcd4a89df987972bf2caaa%2f69e5acc770644466e9ef771c_naomi%20voss_poster.0000000.jpg")"="" muted="" playsinline="" data-wf-ignore="true" data-object-fit="cover">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4" data-wf-ignore="true">
-<source src="media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-wf-ignore="true">
+<div className="review-slide w-slide">
+<div className="review-card">
+<div data-poster-url="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" data-video-urls="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4,https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-autoplay="false" data-loop="false" data-wf-ignore="true" data-w-id="9596c1b5-15ab-7cb2-0551-04bf65e2912a" className="review-video w-background-video w-background-video-atom">
+<video id="9596c1b5-15ab-7cb2-0551-04bf65e2912a-video"  data-wf-ignore="true" data-object-fit="cover">
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_mp4.mp4" data-wf-ignore="true" />
+<source src="/media/69dcd4a89df987972bf2caaa%252F69e5acc770644466e9ef771c_Naomi%20Voss_webm.webm" data-wf-ignore="true" />
 </video>
 <noscript>
-<style>
+<style dangerouslySetInnerHTML={{ __html: `
   [data-wf-bgvideo-fallback-img] {
     display: none;
   }
@@ -1434,21 +1523,21 @@
       width: 100%;
       object-fit: cover;
     }
-  }</style>
+  }` }} />
 <img data-wf-bgvideo-fallback-img="true" src="https://cdn.prod.website-files.com/69dcd4a89df987972bf2caaa%2F69e5acc770644466e9ef771c_Naomi%20Voss_poster.0000000.jpg" alt=""/>
 </noscript>
 <div aria-live="polite">
-<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e2912a-video" class="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
-<span class="play-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" class="video-icon review">
+<button type="button" data-w-bg-video-control="true" aria-controls="9596c1b5-15ab-7cb2-0551-04bf65e2912a-video" className="w-backgroundvideo-backgroundvideoplaypausebutton video-state w-background-video--control">
+<span className="play-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 30 30" fill="none" className="video-icon review">
 <path d="M13.4765 19.3286C13.4765 20.2516 12.6982 21 11.7382 21C10.7783 21 10 20.2516 10 19.3286V10.6714C10 9.74838 10.7783 9 11.7382 9C12.6982 9 13.4765 9.74838 13.4765 10.6714V19.3286Z" fill="currentColor">
 </path>
 <path d="M20 19.3286C20 20.2516 19.2217 21 18.2618 21C17.3018 21 16.5235 20.2516 16.5235 19.3286V10.6714C16.5238 9.74838 17.3021 9 18.2618 9C19.2217 9 20 9.74838 20 10.6714V19.3286Z" fill="currentColor">
 </path>
 </svg>
 </span>
-<span hidden="" class="pause-state review">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" class="video-icon review">
+<span hidden className="pause-state review">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 160 160" fill="none" className="video-icon review">
 <path d="M112.3 77.5779L58.9662 47.4279C57.9328 46.845 56.6728 46.8584 55.6528 47.4547C54.6262 48.0577 53.9995 49.1565 53.9995 50.3491V110.649C53.9995 111.842 54.6262 112.94 55.6528 113.543C56.1728 113.845 56.7528 113.999 57.3328 113.999C57.8928 113.999 58.4595 113.858 58.9662 113.57L112.3 83.4203C113.346 82.824 114 81.7118 114 80.4991C114 79.2864 113.346 78.1742 112.3 77.5779Z" fill="currentColor">
 </path>
 </svg>
@@ -1456,13 +1545,13 @@
 </button>
 </div>
 </div>
-<div class="review-wrap">
-<div class="review-except">“Calendify completely eliminated the scheduling back-and-forth. My clients book sessions and pay upfront via UPI, which increased my booking conversions by 40%.”</div>
-<div class="review-author">
-<img loading="lazy" src="images/69e5acbb02cf0ff61f68abd4_45e2a36cbc72ec682eb0a284feeeb0be_Naomi%20Voss.webp" alt="Dr. Ramesh Sharma" class="review-author-image">
-<div class="review-author-wrapp">
-<div class="review-author-name">Dr. Ramesh Sharma</div>
-<div class="review-author-role">Senior counselor at <strong>Sharma Counseling Clinic</strong>
+<div className="review-wrap">
+<div className="review-except">“Calendify completely eliminated the scheduling back-and-forth. My clients book sessions and pay upfront via UPI, which increased my booking conversions by 40%.”</div>
+<div className="review-author">
+<img loading="lazy" src="/images/69e5acbb02cf0ff61f68abd4_45e2a36cbc72ec682eb0a284feeeb0be_Naomi%20Voss.webp" alt="Dr. Ramesh Sharma" className="review-author-image" />
+<div className="review-author-wrapp">
+<div className="review-author-name">Dr. Ramesh Sharma</div>
+<div className="review-author-role">Senior counselor at <strong>Sharma Counseling Clinic</strong>
 </div>
 </div>
 </div>
@@ -1470,15 +1559,15 @@
 </div>
 </div>
 </div>
-<div class="review-arrow w-slider-arrow-left">
-<div class="w-icon-slider-left">
+<div className="review-arrow w-slider-arrow-left">
+<div className="w-icon-slider-left">
 </div>
 </div>
-<div class="review-arrow w-slider-arrow-right">
-<div class="w-icon-slider-right">
+<div className="review-arrow w-slider-arrow-right">
+<div className="w-icon-slider-right">
 </div>
 </div>
-<div class="review-nav w-slider-nav w-round w-num">
+<div className="review-nav w-slider-nav w-round w-num">
 </div>
 </div>
 </div>
@@ -1486,32 +1575,32 @@
 </div>
 </div>
 </section>
-<section class="related-section">
-<div class="section-space">
-<div class="w-layout-blockcontainer main-container w-container">
-<div class="related-block">
-<div class="related-text-block">
-<div class="related-details-block">
-<div text-animation="" class="related-details">
-<div class="related-info">
-<div data-wf--section-info--variant="dark" class="section-info">{ Insights }</div>
+<section className="related-section">
+<div className="section-space">
+<div className="w-layout-blockcontainer main-container w-container">
+<div className="related-block">
+<div className="related-text-block">
+<div className="related-details-block">
+<div text-animation="true" className="related-details">
+<div className="related-info">
+<div data-wf--section-info--variant="dark" className="section-info">Insights</div>
 </div>
-<div class="related-title">Latest Insights on Automation & Business Growth</div>
-</div>
-</div>
-<div class="related-button-block display-show-for-desktop">
-<div text-animation="" class="related-button">
-<a aria-label="Link Block" data-wf--button--variant="primary" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="/blog" class="button w-inline-block">
-<div class="button-block">
-<div class="button-text-block">
-<div class="button-wrap">
-<div class="button-text">View All</div>
-<div class="button-text">View All</div>
+<div className="related-title">Latest Insights on Automation & Business Growth</div>
 </div>
 </div>
-<div class="button-icon-block">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="button-icon">
-<g clip-path="url(#clip0_118_93)">
+<div className="related-button-block display-show-for-desktop">
+<div text-animation="true" className="related-button">
+<a aria-label="Link Block" data-wf--button--variant="primary" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="/blog" className="button w-inline-block">
+<div className="button-block">
+<div className="button-text-block">
+<div className="button-wrap">
+<div className="button-text">View All</div>
+<div className="button-text">View All</div>
+</div>
+</div>
+<div className="button-icon-block">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="button-icon">
+<g clipPath="url(#clip0_118_93)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -1528,131 +1617,121 @@
 </div>
 </div>
 </div>
-<div class="related-card-block">
-<div step-animation="" class="related-card display-show-for-desktop">
-<div animated-step="" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a293b" style="width:55%" class="blog-wrap item-01 w-dyn-list">
-<div role="list" class="blog-list related w-dyn-items">
-<div role="listitem" class="blog-item w-dyn-item">
-<a aria-label="Link Block" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a293e" href="#blog" class="blog-card w-inline-block">
-<div class="blog-thumb-card">
-<img src="images/69e0abe5451adbb02fbf9cfb_How%20Therapy%20Helps%20You%20Manage%20Anxiety%20in%20Daily%20Life%20Better.avif" loading="lazy" alt="UPI payments in paid bookings" class="blog-thumb">
-<div style="opacity:0.4" class="blog-overlay">
+<div className="related-card-block">
+<div step-animation="true" className="related-card display-show-for-desktop">
+<div animated-step="" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a293b" style={{ width: "55%" }} className="blog-wrap item-01 w-dyn-list">
+<div role="list" className="blog-list related w-dyn-items">
+<div role="listitem" className="blog-item w-dyn-item">
+<a aria-label="Link Block" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a293e" href="#blog" className="blog-card w-inline-block">
+<div className="blog-thumb-card">
+<img src="/images/69e0abe5451adbb02fbf9cfb_How%20Therapy%20Helps%20You%20Manage%20Anxiety%20in%20Daily%20Life%20Better.avif" loading="lazy" alt="UPI payments in paid bookings" className="blog-thumb" />
+<div style={{ opacity: 0.4 }} className="blog-overlay">
 </div>
 </div>
-<div class="blog-details-card">
-<div class="blog-info">
-<div class="blog-tag">
-<div>{</div>
+<div className="blog-details-card">
+<div className="blog-info">
+<div className="blog-tag">
 <div>Automation</div>
-<div>}</div>
 </div>
-<div class="blog-tag blog-date">
+<div className="blog-tag blog-date">
 <div>April 16, 2026</div>
 </div>
 </div>
-<div class="blog-title">Why UPI Payments Boost Booking Conversions by 40% in India</div>
+<div className="blog-title">Why UPI Payments Boost Booking Conversions by 40% in India</div>
 </div>
 </a>
 </div>
 </div>
 </div>
-<div animated-step="" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2950" style="width:100%" class="blog-wrap item-02 w-dyn-list">
-<div role="list" class="blog-list related w-dyn-items">
-<div role="listitem" class="blog-item w-dyn-item">
-<a aria-label="Link Block" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2953" href="#blog" class="blog-card w-inline-block">
-<div class="blog-thumb-card">
-<img src="images/69e0abc3268ba34093fa795c_7%20Signs%20You%20Might%20Benefit%20from%20Talking%20to%20a%20Professional%20Therapist.avif" loading="lazy" alt="Zero-cost serverless SaaS hosting" class="blog-thumb">
-<div style="opacity:0.4" class="blog-overlay">
+<div animated-step="" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2950" style={{ width: "100%" }} className="blog-wrap item-02 w-dyn-list">
+<div role="list" className="blog-list related w-dyn-items">
+<div role="listitem" className="blog-item w-dyn-item">
+<a aria-label="Link Block" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2953" href="#blog" className="blog-card w-inline-block">
+<div className="blog-thumb-card">
+<img src="/images/69e0abc3268ba34093fa795c_7%20Signs%20You%20Might%20Benefit%20from%20Talking%20to%20a%20Professional%20Therapist.avif" loading="lazy" alt="Zero-cost serverless SaaS hosting" className="blog-thumb" />
+<div style={{ opacity: 0.4 }} className="blog-overlay">
 </div>
 </div>
-<div class="blog-details-card">
-<div class="blog-info">
-<div class="blog-tag">
-<div>{</div>
+<div className="blog-details-card">
+<div className="blog-info">
+<div className="blog-tag">
 <div>Technology</div>
-<div>}</div>
 </div>
-<div class="blog-tag blog-date">
+<div className="blog-tag blog-date">
 <div>April 16, 2026</div>
 </div>
 </div>
-<div class="blog-title">How Serverless Architecture Keeps Your SaaS Hosting Budget at Zero</div>
+<div className="blog-title">How Serverless Architecture Keeps Your SaaS Hosting Budget at Zero</div>
 </div>
 </a>
 </div>
 </div>
 </div>
-<div animated-step="" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2965" style="width:55%" class="blog-wrap item-03 w-dyn-list">
-<div role="list" class="blog-list related w-dyn-items">
-<div role="listitem" class="blog-item w-dyn-item">
-<a aria-label="Link Block" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2968" href="#blog" class="blog-card w-inline-block">
-<div class="blog-thumb-card">
-<img src="images/69e0ab97f2ac0d902c13d499_Simple%20Daily%20Self-Care%20Habits%20for%20Better%20Mental%20Health.avif" loading="lazy" alt="Eliminating booking back-and-forth" class="blog-thumb">
-<div style="opacity:0.4" class="blog-overlay">
+<div animated-step="" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2965" style={{ width: "55%" }} className="blog-wrap item-03 w-dyn-list">
+<div role="list" className="blog-list related w-dyn-items">
+<div role="listitem" className="blog-item w-dyn-item">
+<a aria-label="Link Block" data-w-id="0910766c-6e9e-ceec-b130-dfa4bf8a2968" href="#blog" className="blog-card w-inline-block">
+<div className="blog-thumb-card">
+<img src="/images/69e0ab97f2ac0d902c13d499_Simple%20Daily%20Self-Care%20Habits%20for%20Better%20Mental%20Health.avif" loading="lazy" alt="Eliminating booking back-and-forth" className="blog-thumb" />
+<div style={{ opacity: 0.4 }} className="blog-overlay">
 </div>
 </div>
-<div class="blog-details-card">
-<div class="blog-info">
-<div class="blog-tag">
-<div>{</div>
+<div className="blog-details-card">
+<div className="blog-info">
+<div className="blog-tag">
 <div>Productivity</div>
-<div>}</div>
 </div>
-<div class="blog-tag blog-date">
+<div className="blog-tag blog-date">
 <div>April 16, 2026</div>
 </div>
 </div>
-<div class="blog-title">Eliminating the Scheduling Back-and-Forth: Best Practices for Consultants</div>
+<div className="blog-title">Eliminating the Scheduling Back-and-Forth: Best Practices for Consultants</div>
 </div>
 </a>
 </div>
 </div>
 </div>
 </div>
-<div class="related-card display-show-for-mobile">
-<div class="blog-wrap w-dyn-list">
-<div role="list" class="blog-list w-dyn-items">
-<div card-animation="" role="listitem" class="blog-item w-dyn-item">
-<a aria-label="Link Block" href="#blog" class="blog-card w-inline-block">
-<div class="blog-thumb-card">
-<img src="images/69e0abe5451adbb02fbf9cfb_How%20Therapy%20Helps%20You%20Manage%20Anxiety%20in%20Daily%20Life%20Better.avif" loading="lazy" alt="UPI payments in paid bookings" class="blog-thumb">
-<div class="blog-overlay">
+<div className="related-card display-show-for-mobile">
+<div className="blog-wrap w-dyn-list">
+<div role="list" className="blog-list w-dyn-items">
+<div card-animation="" role="listitem" className="blog-item w-dyn-item">
+<a aria-label="Link Block" href="#blog" className="blog-card w-inline-block">
+<div className="blog-thumb-card">
+<img src="/images/69e0abe5451adbb02fbf9cfb_How%20Therapy%20Helps%20You%20Manage%20Anxiety%20in%20Daily%20Life%20Better.avif" loading="lazy" alt="UPI payments in paid bookings" className="blog-thumb" />
+<div className="blog-overlay">
 </div>
 </div>
-<div class="blog-details-card">
-<div class="blog-info">
-<div class="blog-tag">
-<div>{</div>
+<div className="blog-details-card">
+<div className="blog-info">
+<div className="blog-tag">
 <div>Automation</div>
-<div>}</div>
 </div>
-<div class="blog-tag blog-date">
+<div className="blog-tag blog-date">
 <div>April 16, 2026</div>
 </div>
 </div>
-<div class="blog-title">Why UPI Payments Boost Booking Conversions by 40% in India</div>
+<div className="blog-title">Why UPI Payments Boost Booking Conversions by 40% in India</div>
 </div>
 </a>
 </div>
-<div card-animation="" role="listitem" class="blog-item w-dyn-item">
-<a aria-label="Link Block" href="#blog" class="blog-card w-inline-block">
-<div class="blog-thumb-card">
-<img src="images/69e0abc3268ba34093fa795c_7%20Signs%20You%20Might%20Benefit%20from%20Talking%20to%20a%20Professional%20Therapist.avif" loading="lazy" alt="Zero-cost serverless SaaS hosting" class="blog-thumb">
-<div class="blog-overlay">
+<div card-animation="" role="listitem" className="blog-item w-dyn-item">
+<a aria-label="Link Block" href="#blog" className="blog-card w-inline-block">
+<div className="blog-thumb-card">
+<img src="/images/69e0abc3268ba34093fa795c_7%20Signs%20You%20Might%20Benefit%20from%20Talking%20to%20a%20Professional%20Therapist.avif" loading="lazy" alt="Zero-cost serverless SaaS hosting" className="blog-thumb" />
+<div className="blog-overlay">
 </div>
 </div>
-<div class="blog-details-card">
-<div class="blog-info">
-<div class="blog-tag">
-<div>{</div>
+<div className="blog-details-card">
+<div className="blog-info">
+<div className="blog-tag">
 <div>Technology</div>
-<div>}</div>
 </div>
-<div class="blog-tag blog-date">
+<div className="blog-tag blog-date">
 <div>April 16, 2026</div>
 </div>
 </div>
-<div class="blog-title">How Serverless Architecture Keeps Your SaaS Hosting Budget at Zero</div>
+<div className="blog-title">How Serverless Architecture Keeps Your SaaS Hosting Budget at Zero</div>
 </div>
 </a>
 </div>
@@ -1660,19 +1739,19 @@
 </div>
 </div>
 </div>
-<div class="related-button-block display-show-for-mobile">
-<div text-animation="" class="related-button">
-<a aria-label="Link Block" data-wf--button--variant="primary" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="/blog" class="button w-inline-block">
-<div class="button-block">
-<div class="button-text-block">
-<div class="button-wrap">
-<div class="button-text">View All</div>
-<div class="button-text">View All</div>
+<div className="related-button-block display-show-for-mobile">
+<div text-animation="true" className="related-button">
+<a aria-label="Link Block" data-wf--button--variant="primary" data-w-id="db515689-145f-3d80-0505-f70c0d66b4f0" href="/blog" className="button w-inline-block">
+<div className="button-block">
+<div className="button-text-block">
+<div className="button-wrap">
+<div className="button-text">View All</div>
+<div className="button-text">View All</div>
 </div>
 </div>
-<div class="button-icon-block">
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="button-icon">
-<g clip-path="url(#clip0_118_93)">
+<div className="button-icon-block">
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" className="button-icon">
+<g clipPath="url(#clip0_118_93)">
 <path d="M14.9687 0H2.87808C2.30933 0 1.84683 0.4625 1.84683 1.03125C1.84683 1.6 2.30933 2.0625 2.87808 2.0625H12.475L0.303076 14.2375C-0.100049 14.6406 -0.100049 15.2937 0.303076 15.6969C0.706201 16.1 1.35933 16.1 1.76245 15.6969L13.9343 3.52187V13.1187C13.9343 13.6875 14.3968 14.15 14.9656 14.15C15.5343 14.15 15.9968 13.6875 15.9968 13.1187V1.03125C16 0.4625 15.5375 0 14.9687 0Z" fill="currentColor">
 </path>
 </g>
@@ -1693,192 +1772,92 @@
 </div>
 </section>
 </div>
-<section class="footer-section">
-<div class="w-layout-blockcontainer main-container w-container">
-<div class="footer-block">
-<div step-animation="" class="footer-contact-bock">
-<div animated-step="" class="footer-contact">
-<div class="footer-contact-title">Contact Support</div>
-<div class="footer-contact-wrap">
-<div class="footer-contact-text">hello@calendify.in</div>
-<div class="footer-contact-span">24/7 Server Monitoring & Webhook Alerts</div>
+<section className="footer-section">
+<div className="w-layout-blockcontainer main-container w-container">
+<div className="footer-block">
+<div step-animation="true" className="footer-contact-bock">
+<div animated-step="true" className="footer-contact">
+<div className="footer-contact-title">Contact Support</div>
+<div className="footer-contact-wrap">
+<div className="footer-contact-text">hello@calendify.in</div>
+<div className="footer-contact-span">24/7 Server Monitoring & Webhook Alerts</div>
 </div>
 </div>
-<div animated-step="" class="footer-contact">
-<div class="footer-contact-info">E-Mail Us</div>
-<div class="footer-contact-mail">hello@calendify.in</div>
+<div animated-step="true" className="footer-contact">
+<div className="footer-contact-info">E-Mail Us</div>
+<div className="footer-contact-mail">hello@calendify.in</div>
 </div>
 </div>
-<div step-animation="" class="footer-navmenu-block">
-<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf76633972-76633960" class="footer-navmenu">
-<div class="footer-navmenu-title">SaaS Updates</div>
-<div class="footer-navmenu-form w-form">
-<div class="footer-navmenu-text">Get the latest performance tips, scheduling rules, and transaction setup ideas.</div>
-<form id="wf-form-Newsletter" name="wf-form-Newsletter" data-name="Newsletter" method="get" class="footer-navmenu-input" data-wf-page-id="69e5d1dcd77e4d3b24627a1c" data-wf-element-id="444d3749-8f82-d148-444f-19cf76633978">
-<input class="footer-navmenu-field w-input" maxlength="256" name="email" data-name="Email" placeholder="Enter Your Work Email Here" type="email" id="email" required="">
-<input type="submit" data-wait="" class="footer-navmenu-btn w-button" value="">
+<div step-animation="true" className="footer-navmenu-block">
+<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf76633972-76633960" className="footer-navmenu">
+<div className="footer-navmenu-title">SaaS Updates</div>
+<div className="footer-navmenu-form w-form">
+<div className="footer-navmenu-text">Get the latest performance tips, scheduling rules, and transaction setup ideas.</div>
+<form id="wf-form-Newsletter" name="wf-form-Newsletter" data-name="Newsletter" method="get" className="footer-navmenu-input" data-wf-page-id="69e5d1dcd77e4d3b24627a1c" data-wf-element-id="444d3749-8f82-d148-444f-19cf76633978">
+<input className="footer-navmenu-field w-input" maxLength="256" name="email" data-name="Email" placeholder="Enter Your Work Email Here" type="email" id="email" required />
+<input type="submit" data-wait className="footer-navmenu-btn w-button" value="" />
 </form>
-<div class="footer-navmenu-done w-form-done">
-<div class="footer-navmenu-message">Thank you for your submission!</div>
+<div className="footer-navmenu-done w-form-done">
+<div className="footer-navmenu-message">Thank you for your submission!</div>
 </div>
-<div class="footer-navmenu-error w-form-fail">
-<div class="footer-navmenu-message">Oops! Something went wrong.</div>
-</div>
-</div>
-</div>
-<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf76633981-76633960" class="footer-navmenu">
-<div class="footer-navmenu-title">Menu</div>
-<div class="footer-navmenu-wrap">
-<a aria-label="Nav Link" href="/" aria-current="page" class="footer-navmenu-link w--current">Home</a>
-<a aria-label="Nav Link" href="#about" class="footer-navmenu-link">Why Us</a>
-<a aria-label="Nav Link" href="#services" class="footer-navmenu-link">Modules</a>
-<a aria-label="Nav Link" href="#features" class="footer-navmenu-link">Features</a>
-</div>
-</div>
-<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf7663398d-76633960" class="footer-navmenu">
-<div class="footer-navmenu-title">Legal Pages</div>
-<div class="footer-navmenu-wrap">
-<a aria-label="Nav Link" href="/faq" class="footer-navmenu-link">FAQ</a>
-<a aria-label="Nav Link" href="/privacy-policy" class="footer-navmenu-link">Privacy Policy</a>
-<a aria-label="Nav Link" href="/terms-conditions" class="footer-navmenu-link">Terms & Conditions</a>
-<a aria-label="Nav Link" href="/utility/instructions" class="footer-navmenu-link">Instructions</a>
-</div>
-</div>
-<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf76633999-76633960" class="footer-navmenu">
-<div class="footer-navmenu-title">Utility Pages</div>
-<div class="footer-navmenu-wrap">
-<a aria-label="Nav Link" href="/404" class="footer-navmenu-link">404</a>
-<a aria-label="Nav Link" href="/utility/licenses" class="footer-navmenu-link">Licenses</a>
-<a aria-label="Nav Link" href="/utility/style-guide" class="footer-navmenu-link">Style Guide</a>
-<a aria-label="Nav Link" href="/utility/change-log" class="footer-navmenu-link">Change-Log</a>
-</div>
-</div>
-<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf766339a5-76633960" class="footer-navmenu">
-<div class="footer-navmenu-title">SOCIAL</div>
-<div class="footer-navmenu-wrap">
-<a aria-label="Nav Link" href="https://www.instagram.com/tncflow" target="_blank" class="footer-navmenu-link">Instagram</a>
-<a aria-label="Nav Link" href="https://www.linkedin.com/company/tncflow" target="_blank" class="footer-navmenu-link">LinkedIn</a>
-<a aria-label="Nav Link" href="https://www.x.com/TNCFlow" target="_blank" class="footer-navmenu-link">{X} Twitter</a>
-<a aria-label="Nav Link" href="https://www.facebook.com/TNCFlow" target="_blank" class="footer-navmenu-link">Facebook</a>
+<div className="footer-navmenu-error w-form-fail">
+<div className="footer-navmenu-message">Oops! Something went wrong.</div>
 </div>
 </div>
 </div>
-<div class="footer-copyright-block">
-<div text-animation="" class="footer-copyright">
-<div class="footer-copy-text">Copyright © 2026 Calendify India</div>
-<div class="footer-copy-dot">
-</div>
-<div class="footer-copy-text">Designed by <a href="https://tncflow.com" aria-label="Link Block" target="_blank" class="footer-copy-link">TNCFlow</a>
-</div>
-<div class="footer-copy-dot">
-</div>
-<div class="footer-copy-text">Powered by <a href="https://www.webflow.com" aria-label="Link Block" target="_blank" class="footer-copy-link">Webflow</a>
+<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf76633981-76633960" className="footer-navmenu">
+<div className="footer-navmenu-title">Menu</div>
+<div className="footer-navmenu-wrap">
+<a aria-label="Nav Link" href="/" aria-current="page" className="footer-navmenu-link w--current">Home</a>
+<a aria-label="Nav Link" href="#about" className="footer-navmenu-link">Why Us</a>
+<a aria-label="Nav Link" href="#services" className="footer-navmenu-link">Modules</a>
+<a aria-label="Nav Link" href="#features" className="footer-navmenu-link">Features</a>
 </div>
 </div>
-<img text-animation="" loading="lazy" alt="Calendify" src="images/69df799651308cac0cd0b1e2_faa2dd7415b250db2e839c2a997f119e_SoulSpace%20Footer.svg" class="footer-watermark">
+<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf7663398d-76633960" className="footer-navmenu">
+<div className="footer-navmenu-title">Legal Pages</div>
+<div className="footer-navmenu-wrap">
+<a aria-label="Nav Link" href="/faq" className="footer-navmenu-link">FAQ</a>
+<a aria-label="Nav Link" href="/privacy-policy" className="footer-navmenu-link">Privacy Policy</a>
+<a aria-label="Nav Link" href="/terms-conditions" className="footer-navmenu-link">Terms & Conditions</a>
+<a aria-label="Nav Link" href="/utility/instructions" className="footer-navmenu-link">Instructions</a>
 </div>
 </div>
-<div class="buy-now">
-<div class="buy-now-line">
-</div>
-<div data-w-id="cf0040d8-047a-0dcb-a6c9-47f0210576c0" class="buy-now-button">
-<div class="buy-now-title">Get Started</div>
-<svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" class="buy-now-icon">
-<path d="M10 17.1869C9.46055 17.1869 9.02344 16.7498 9.02344 16.2104V3.79004C9.02344 3.25059 9.46055 2.81348 10 2.81348C10.5395 2.81348 10.9766 3.25059 10.9766 3.79004V16.2104C10.9766 16.7498 10.5395 17.1869 10 17.1869Z" fill="currentColor">
-</path>
-<path d="M16.2104 10.9766H3.79004C3.25059 10.9766 2.81348 10.5395 2.81348 10C2.81348 9.46055 3.25059 9.02344 3.79004 9.02344H16.2104C16.7498 9.02344 17.1869 9.46055 17.1869 10C17.1869 10.5395 16.7498 10.9766 16.2104 10.9766Z" fill="currentColor">
-</path>
-</svg>
-</div>
-<div class="buy-now-details">
-<div class="buy-now-text">Ready to eliminate scheduling back-and-forth? Build your high-performance serverless scheduling portal today.</div>
-<div class="buy-now-list">
-<a aria-label="Link Block" href="#contact" target="_blank" class="buy-now-item w-inline-block">
-<div class="buy-now-list-icon">
-<img loading="lazy" src="images/69f44d1afa23993031ff8877_Group%201437253702.svg" alt="" class="buy-now-favicon">
-</div>
-<div class="buy-now-list-text">Deploy Free Tier Portal</div>
-</a>
-<a aria-label="Link Block" href="#about" target="_blank" class="buy-now-item w-inline-block">
-<div class="buy-now-list-icon">
-<img loading="lazy" src="images/69f44d1afa23993031ff8876_Webflow.svg" alt="" class="buy-now-favicon">
-</div>
-<div class="buy-now-list-text">Read Product PRD Docs</div>
-</a>
-<a aria-label="Link Block" href="#services" target="_blank" class="buy-now-item w-inline-block">
-<div class="buy-now-list-icon">
-<img loading="lazy" src="images/69f44d1afa23993031ff8878_Group%20%281%29.svg" alt="" class="buy-now-favicon">
-</div>
-<div class="buy-now-list-text">Configure Razorpay Webhook</div>
-</a>
-<a aria-label="Link Block" href="mailto:hello@calendify.in" target="_blank" class="buy-now-item w-inline-block">
-<div class="buy-now-list-icon">
-<img loading="lazy" src="images/69f44d1afa23993031ff8875_Group%20%282%29.svg" alt="" class="buy-now-favicon">
-</div>
-<div class="buy-now-list-text">Email Developers Support</div>
-</a>
+<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf76633999-76633960" className="footer-navmenu">
+<div className="footer-navmenu-title">Utility Pages</div>
+<div className="footer-navmenu-wrap">
+<a aria-label="Nav Link" href="/404" className="footer-navmenu-link">404</a>
+<a aria-label="Nav Link" href="/utility/licenses" className="footer-navmenu-link">Licenses</a>
+<a aria-label="Nav Link" href="/utility/style-guide" className="footer-navmenu-link">Style Guide</a>
+<a aria-label="Nav Link" href="/utility/change-log" className="footer-navmenu-link">Change-Log</a>
 </div>
 </div>
-<div class="buy-now-line">
+<div animated-step="" id="w-node-_444d3749-8f82-d148-444f-19cf766339a5-76633960" className="footer-navmenu">
+<div className="footer-navmenu-title">SOCIAL</div>
+<div className="footer-navmenu-wrap">
+<a aria-label="Nav Link" href="https://www.instagram.com/tncflow" target="_blank" className="footer-navmenu-link">Instagram</a>
+<a aria-label="Nav Link" href="https://www.linkedin.com/company/tncflow" target="_blank" className="footer-navmenu-link">LinkedIn</a>
+<a aria-label="Nav Link" href="https://www.x.com/TNCFlow" target="_blank" className="footer-navmenu-link">X (Twitter)</a>
+<a aria-label="Nav Link" href="https://www.facebook.com/TNCFlow" target="_blank" className="footer-navmenu-link">Facebook</a>
 </div>
 </div>
+</div>
+<div className="footer-copyright-block">
+<div text-animation="true" className="footer-copyright">
+<div className="footer-copy-text">Copyright © 2026 Calendify India</div>
+<div className="footer-copy-dot">
+</div>
+<div className="footer-copy-text">Designed by <a href="https://tncflow.com" aria-label="Link Block" target="_blank" className="footer-copy-link">TNCFlow</a>
+</div>
+
+</div>
+<img text-animation="" loading="lazy" alt="Calendify" src="/images/69df799651308cac0cd0b1e2_faa2dd7415b250db2e839c2a997f119e_SoulSpace%20Footer.svg" className="footer-watermark" />
+</div>
+</div>
+
 </div>
 </section>
 </div>
-<script src="js/jquery-3.5.1.min.dc5e7f18c8.js" type="text/javascript" crossorigin="anonymous">
-</script>
-<script src="js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript" crossorigin="anonymous">
-</script>
-<script src="js/webflow.schunk.9bf5c47fc595a77b.js" type="text/javascript" crossorigin="anonymous">
-</script>
-<script src="js/webflow.7e81f4df.2b34c97f0f395373.js" type="text/javascript" crossorigin="anonymous">
-</script>
-<script src="js/gsap.min.js" type="text/javascript">
-</script>
-<script src="js/ScrollTrigger.min.js" type="text/javascript">
-</script>
-<script type="text/javascript">gsap.registerPlugin(ScrollTrigger);</script>
-<script src="js/gsap.min_1.js">
-</script>
-<script src="js/Draggable.min.js">
-</script>
-<script>
-gsap.registerPlugin(Draggable);
-
-document.querySelectorAll('[data-carousel="wrapper"]').forEach(wrapper => {
-  const inner = wrapper.querySelector('[data-carousel="inner"]');
-
-  function getBounds() {
-    const maxScroll = inner.scrollWidth - wrapper.offsetWidth;
-    return {
-      minX: -maxScroll,
-      maxX: 0
-    };
-  }
-
-  const drag = Draggable.create(inner, {
-    type: "x",
-    bounds: getBounds(),
-    inertia: true,
-    edgeResistance: 1.36,
-
-    onPress() {
-      this.update();
-    },
-
-    onDrag() {
-      gsap.set(inner, { x: this.x });
-    },
-
-    onThrowUpdate() {
-      gsap.set(inner, { x: this.x });
-    }
-  })[0];
-
-  window.addEventListener("resize", () => {
-    drag.applyBounds(getBounds());
-  });
-});
-</script>
-</body>
-</html>
+    </>
+  );
+}
